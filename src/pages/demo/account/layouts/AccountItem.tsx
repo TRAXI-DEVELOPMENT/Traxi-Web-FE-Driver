@@ -25,6 +25,8 @@ export default function AccountItem({ tripsDriver }: Props) {
   const [status, setStatus] = useState<string | null>(null);
   const router = useRouter();
 
+  const { BookingDate } = tripsDriver;
+
   useEffect(() => {
     if (!tripsDriver) return; // Sử dụng điều kiện bên trong useEffect thay vì bao quanh việc gọi useEffect
 
@@ -118,7 +120,7 @@ export default function AccountItem({ tripsDriver }: Props) {
             {tripsDriver.Status}
           </Typography>
           <Typography variant="body2" sx={{ mt: 0.5, mb: 1 }}>
-            {formatDate(tripDetails?.StartTime ?? '')}
+            {formatDate(BookingDate)}
           </Typography>
         </Stack>
         <Stack direction="row" alignItems="center" justifyContent="space-between">

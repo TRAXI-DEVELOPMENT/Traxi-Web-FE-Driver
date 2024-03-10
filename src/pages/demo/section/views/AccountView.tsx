@@ -40,10 +40,13 @@ export default function AccountView() {
 
   useEffect(() => {
     const fetchTripDetails = async () => {
-      if (!userId) return; // Kiểm tra để đảm bảo userId không phải là chuỗi rỗng hoặc undefined
+      if (!userId) return;
 
       try {
-        const data = await getDetailTripByDriver(userId);
+        let data = await getDetailTripByDriver(userId);
+        data.sort((a: TripsDriver, b: TripsDriver) => {
+          return new Date(b.BookingDate).getTime() - new Date(a.BookingDate).getTime();
+        });
         setTripsDriver(data);
       } catch (error) {
         console.error('Failed to fetch trip details:', error);
