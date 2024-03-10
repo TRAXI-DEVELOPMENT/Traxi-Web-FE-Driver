@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import useSocket from '../hooks/useSocket';
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 interface TripDetail {
   Id: string;
