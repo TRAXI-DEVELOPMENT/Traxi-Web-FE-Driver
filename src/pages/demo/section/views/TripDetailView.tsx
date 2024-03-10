@@ -21,6 +21,7 @@ import { Result } from 'src/types/trips';
 import LoadingScreen from 'src/components/loading-screen';
 import TravelTourDetailsHeader from '../trip-list/trip-detail/TripDetailHeader';
 import TravelTourDetailsReserveForm from '../trip-list/trip-detail/TripDetailForm';
+import RouteMap from 'src/components/routemap';
 //
 
 // ----------------------------------------------------------------------
@@ -68,6 +69,7 @@ export default function TripDetailView({ tripId }: Type) {
             </Grid>
             <Grid xs={12} md={7} lg={8}>
               <TravelTourDetailsHeader tripDetails={tripDetails} />
+              <RouteMap />
               <Divider sx={{ borderStyle: 'dashed', my: 5 }} />
             </Grid>
           </Grid>
