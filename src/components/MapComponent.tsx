@@ -5,8 +5,6 @@ import React, { useRef, useEffect, useState } from 'react';
 // api
 import { getDetailTrip } from 'src/api/Trip/Trip';
 // layouts
-import MainLayout from 'src/layouts/main';
-// sections
 import { GoogleMap, useLoadScript, DirectionsRenderer } from '@react-google-maps/api';
 
 const mapContainerStyle = {

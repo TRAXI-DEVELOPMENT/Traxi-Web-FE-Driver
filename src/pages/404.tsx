@@ -3,7 +3,7 @@ import Head from 'next/head';
 // layouts
 import CompactLayout from 'src/layouts/compact';
 // sections
-import { Error404View } from 'src/sections/error/view';
+
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ export default function Page404() {
         <title>404 Page Not Found | ZONE UI</title>
       </Head>
 
-      <Error404View />
+      
     </>
   );
 }

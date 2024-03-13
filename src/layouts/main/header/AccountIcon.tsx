@@ -49,7 +49,14 @@ export default function MenuAppBar() {
         onClose={handleClose}
       >
         <MenuItem onClick={handleClose}>Thông tin cá nhân</MenuItem>
-        <MenuItem onClick={logout}>Đăng xuất</MenuItem>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            logout();
+          }}
+        >
+          Đăng xuất
+        </MenuItem>
       </Menu>
     </div>
   );

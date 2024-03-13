@@ -1,24 +1,20 @@
 // next
 import Head from 'next/head';
 // layouts
-import MainLayout from 'src/layouts/main';
+import SimpleLayout from 'src/layouts/simple';
+import TripListView from './demo/section/views/TripListView';
 // sections
-import HomeView from 'src/sections/_home/view';
 
 // ----------------------------------------------------------------------
 
-HomePage.getLayout = (page: React.ReactElement) => <MainLayout>{page}</MainLayout>;
+HomePage.getLayout = (page: React.ReactElement) => <SimpleLayout>{page}</SimpleLayout>;
 
 // ----------------------------------------------------------------------
 
 export default function HomePage() {
   return (
     <>
-      <Head>
-        <title>The starting point for your next project | ZONE UI</title>
-      </Head>
-
-      <HomeView />
+      <TripListView />
     </>
   );
 }

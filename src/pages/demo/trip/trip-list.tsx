@@ -4,9 +4,8 @@ import Head from 'next/head';
 import MainLayout from 'src/layouts/main';
 // components
 
-// sections
 import TripListView from '../section/views/TripListView';
-import TripComponent from 'src/components/TripComponent';
+
 
 // ----------------------------------------------------------------------
 

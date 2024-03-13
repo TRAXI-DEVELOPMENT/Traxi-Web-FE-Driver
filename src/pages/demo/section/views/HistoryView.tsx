@@ -29,7 +29,6 @@ import {
   EcommerceAccountOrdersTableToolbar,
 } from 'src/sections/_e-commerce/account/orders';
 // components
-import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
 import EcommerceAccountLayout from '../../account/layouts/AccountLayout';
 

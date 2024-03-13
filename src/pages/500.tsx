@@ -2,8 +2,6 @@
 import Head from 'next/head';
 // layouts
 import CompactLayout from 'src/layouts/compact';
-// sections
-import { Error500View } from 'src/sections/error/view';
 
 // ----------------------------------------------------------------------
 
@@ -18,7 +16,7 @@ export default function Page500() {
         <title>500 Internal Server Error | ZONE UI</title>
       </Head>
 
-      <Error500View />
+
     </>
   );
 }

@@ -264,7 +264,7 @@ export default function TripItem({ trip, vertical }: Props) {
         <Stack direction="row" alignItems="center" justifyContent="space-between">
           <Typography>{formatDate(BookingDate)}</Typography>
           <Typography variant="h4" style={{ color: '#4C9FED' }}>
-            {tripDetails?.Distance ? `${tripDetails.Distance} km` : 'null'}
+            {tripDetails?.Distance ? `${fRoundToOneDecimal(tripDetails.Distance)} km` : 'null'}
           </Typography>
         </Stack>
         <Stack direction="row" alignItems="center">
@@ -272,7 +272,9 @@ export default function TripItem({ trip, vertical }: Props) {
             <>
               <Avatar src={customerInfo.ImageURL} />
               <Typography variant="body2" sx={{ ml: 1, mr: 0.5 }}>
-                {customerInfo.FulllName} - {customerInfo.Phone}
+                {customerInfo.FulllName}
+                <br />
+                {customerInfo.Phone}
               </Typography>
             </>
           )}
