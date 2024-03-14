@@ -109,15 +109,12 @@ export const pageLinks = [
   {
     order: '5',
     subheader: 'Demo',
-    items: [
-      { title: 'Login Background', path: paths.demologin }
-    ],
+    items: [{ title: 'Login Background', path: paths.demologin }],
   },
 ];
 
 export const navConfig = [
   { title: 'Trang chủ', path: '/demo' },
-  { title: 'Components', path: paths.components.root },
   {
     title: 'Pages',
     path: paths.pages,

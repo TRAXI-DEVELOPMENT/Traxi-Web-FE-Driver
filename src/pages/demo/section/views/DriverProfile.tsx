@@ -1,20 +1,9 @@
-import * as Yup from 'yup';
-import { useForm, Controller } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useEffect, useState } from 'react';
-// @mui
-import { LoadingButton } from '@mui/lab';
-import { DatePicker } from '@mui/x-date-pickers';
-import { Box, Typography, Stack, IconButton, InputAdornment, TextField } from '@mui/material';
-// assets
-import { countries } from 'src/assets/data';
-// components
-import Iconify from 'src/components/iconify';
-import FormProvider, { RHFTextField, RHFSelect } from 'src/components/hook-form';
-//
+import { Box, Typography, Stack, TextField } from '@mui/material';
 import EcommerceAccountLayout from '../../account/layouts/AccountLayout';
 import { useDriverInfo } from 'src/hooks/useDriverInfo';
 import { getDriverInfo } from 'src/api/Driver/Driver';
+import DriverLicenseCard from '../../components/navbar/DriverLicenseCard';
 
 // ----------------------------------------------------------------------
 
@@ -38,7 +27,6 @@ export default function DriverProfile() {
         .then((data) => {
           const { result } = data;
           if (result) {
-            // Cập nhật state với toàn bộ dữ liệu driver
             setDriverData({
               fullName: result.FullName,
               phone: result.Phone,
@@ -97,53 +85,53 @@ export default function DriverProfile() {
 
       <Stack spacing={3} sx={{ my: 5 }}>
         <Typography variant="h5"> Change Password </Typography>
-
+        <DriverLicenseCard degreeId={driverId} />
         {/* <Stack spacing={2.5}>
-          <RHFTextField
-            name="oldPassword"
-            label="Old Password"
-            type={showPassword ? 'text' : 'password'}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleShowPassword} edge="end">
-                    <Iconify icon={showPassword ? 'carbon:view' : 'carbon:view-off'} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-
-          <RHFTextField
-            name="newPassword"
-            label="New Password"
-            type={showPassword ? 'text' : 'password'}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleShowPassword} edge="end">
-                    <Iconify icon={showPassword ? 'carbon:view' : 'carbon:view-off'} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-
-          <RHFTextField
-            name="confirmNewPassword"
-            label="Confirm New Password"
-            type={showPassword ? 'text' : 'password'}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <IconButton onClick={handleShowPassword} edge="end">
-                    <Iconify icon={showPassword ? 'carbon:view' : 'carbon:view-off'} />
-                  </IconButton>
-                </InputAdornment>
-              ),
-            }}
-          />
-        </Stack> */}
+              <RHFTextField
+                name="oldPassword"
+                label="Old Password"
+                type={showPassword ? 'text' : 'password'}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleShowPassword} edge="end">
+                        <Iconify icon={showPassword ? 'carbon:view' : 'carbon:view-off'} />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+    
+              <RHFTextField
+                name="newPassword"
+                label="New Password"
+                type={showPassword ? 'text' : 'password'}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleShowPassword} edge="end">
+                        <Iconify icon={showPassword ? 'carbon:view' : 'carbon:view-off'} />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+    
+              <RHFTextField
+                name="confirmNewPassword"
+                label="Confirm New Password"
+                type={showPassword ? 'text' : 'password'}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <IconButton onClick={handleShowPassword} edge="end">
+                        <Iconify icon={showPassword ? 'carbon:view' : 'carbon:view-off'} />
+                      </IconButton>
+                    </InputAdornment>
+                  ),
+                }}
+              />
+            </Stack> */}
       </Stack>
     </EcommerceAccountLayout>
   );
