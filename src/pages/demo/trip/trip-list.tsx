@@ -6,14 +6,13 @@ import MainLayout from 'src/layouts/main';
 
 import TripListView from '../section/views/TripListView';
 
+// ----------------------------------------------------------------------
+
+TripListPage.getLayout = (page: React.ReactElement) => <MainLayout>{page}</MainLayout>;
 
 // ----------------------------------------------------------------------
 
-ElearningCoursesPage.getLayout = (page: React.ReactElement) => <MainLayout>{page}</MainLayout>;
-
-// ----------------------------------------------------------------------
-
-export default function ElearningCoursesPage() {
+export default function TripListPage() {
   return (
     <>
       <TripListView />

@@ -18,7 +18,6 @@ import {
   ElearningFilterRating,
   ElearningFilterLanguage,
   ElearningFilterDuration,
-  ElearningFilterCategories,
 } from 'src/sections/_e-learning/course/filters/components';
 
 // ----------------------------------------------------------------------
@@ -125,13 +124,6 @@ export default function TripListFilter({ mobileOpen, onMobileClose }: Props) {
         <ElearningFilterDuration
           filterDuration={filters.filterDuration}
           onChangeDuration={handleChangeDuration}
-        />
-      </Block>
-
-      <Block title="Category">
-        <ElearningFilterCategories
-          filterCategories={filters.filterCategories}
-          onChangeCategory={handleChangeCategory}
         />
       </Block>
 

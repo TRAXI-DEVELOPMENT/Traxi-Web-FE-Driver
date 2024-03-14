@@ -1,15 +1,8 @@
-// next
-import NextLink from 'next/link';
 // @mui
-import { Link, Stack, Divider, Typography } from '@mui/material';
-import { alpha, styled } from '@mui/material/styles';
-// routes
-import { paths } from 'src/routes/paths';
-// utils
-import { bgGradient } from 'src/utils/cssStyles';
+import { Stack, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
+// components
 import AuthLoginForm from '../components/AuthLoginForm';
-import AuthWithSocial from '../components/AuthWithSocial';
-//
 
 // ----------------------------------------------------------------------
 
@@ -27,7 +20,7 @@ const StyledRoot = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function DemoLoginBackgroundView() {
+export default function DemoLoginView() {
   return (
     <StyledRoot>
       <Stack

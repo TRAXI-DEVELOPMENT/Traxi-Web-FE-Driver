@@ -3,8 +3,7 @@ import { useState, useEffect } from 'react';
 import { Container, Stack, Typography, Button, Box } from '@mui/material';
 // config
 import { NAV } from 'src/config-global';
-// _mock
-import { _courses } from 'src/_mock';
+
 // api
 import { getActiveTrips } from 'src/api/Trip/Trip';
 // types

@@ -46,14 +46,6 @@ export default function Header({ isOffset }: Props) {
         }}
       >
         <Logo />
-
-        <Stack spacing={1} direction="row" alignItems="center">
-          <SettingsDrawer />
-
-          <Link href={paths.support} component={NextLink} variant="subtitle2" color="inherit">
-            Need Help?
-          </Link>
-        </Stack>
       </Toolbar>
 
       {isOffset && <HeaderShadow />}

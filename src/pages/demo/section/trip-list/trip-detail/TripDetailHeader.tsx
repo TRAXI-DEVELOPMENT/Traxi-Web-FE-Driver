@@ -17,8 +17,6 @@ import CarCrashIcon from '@mui/icons-material/CarCrash';
 import { fShortenNumber } from 'src/utils/formatNumber';
 // types
 import { Result } from 'src/types/trips';
-// _mock
-import { _socials } from 'src/_mock';
 // components
 import Iconify from 'src/components/iconify';
 import Image from 'src/components/image';
@@ -30,7 +28,7 @@ type Props = {
   tripDetails: Result;
 };
 
-export default function TravelTourDetailsHeader({ tripDetails }: Props) {
+export default function TripDetailHeader({ tripDetails }: Props) {
   const { TripId, BookingDate, Status, UpDate, CustomerId, DriverId, TripDetail } = tripDetails;
 
   const [open, setOpen] = useState<HTMLElement | null>(null);

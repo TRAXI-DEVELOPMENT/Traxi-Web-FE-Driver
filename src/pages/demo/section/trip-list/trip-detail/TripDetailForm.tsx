@@ -21,7 +21,7 @@ type Props = {
   tripId: string;
 };
 
-export default function TravelTourDetailsReserveForm({ tripDetails, tripId }: Props) {
+export default function TripDetailForm({ tripDetails, tripId }: Props) {
   const { push } = useRouter();
 
   const { TripDetail } = tripDetails;

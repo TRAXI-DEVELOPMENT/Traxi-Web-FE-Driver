@@ -19,8 +19,6 @@ import useActiveLink from 'src/hooks/useActiveLink';
 import { NAV } from 'src/config-global';
 // routes
 import { paths } from 'src/routes/paths';
-// _mock
-import _mock from 'src/_mock';
 // components
 import Iconify from 'src/components/iconify';
 import TextMaxLine from 'src/components/text-max-line';

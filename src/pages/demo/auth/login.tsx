@@ -4,17 +4,17 @@ import Head from 'next/head';
 import SimpleLayout from 'src/layouts/simple';
 
 // sections
-import DemoLoginBackgroundView from '../section/auth/views/LoginView';
+import DemoLoginView from '../section/auth/views/LoginView';
 // ----------------------------------------------------------------------
 
-LoginBackgroundPage.getLayout = (page: React.ReactElement) => <SimpleLayout>{page}</SimpleLayout>;
+LoginPage.getLayout = (page: React.ReactElement) => <SimpleLayout>{page}</SimpleLayout>;
 
 // ----------------------------------------------------------------------
 
-export default function LoginBackgroundPage() {
+export default function LoginPage() {
   return (
     <>
-      <DemoLoginBackgroundView />
+      <DemoLoginView />
     </>
   );
 }

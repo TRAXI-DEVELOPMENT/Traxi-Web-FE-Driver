@@ -18,8 +18,6 @@ import {
 } from '@mui/material';
 // hooks
 import useResponsive from 'src/hooks/useResponsive';
-// _mock
-import { _socials } from 'src/_mock';
 // components
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';

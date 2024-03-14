@@ -9,14 +9,12 @@ import Image from 'src/components/image';
 import Iconify from 'src/components/iconify';
 import LoadingScreen from 'src/components/loading-screen';
 
-// _mock
-import { _tours } from 'src/_mock';
 //
 import { useEffect, useState } from 'react';
 import { getDetailTrip } from 'src/api/Trip/Trip';
 import { TripDetail } from 'src/types/trips';
-import TravelOrderCompletedSummary from 'src/pages/demo/section/trip-list/complete-trip/TravelOrderCompletedSummary';
 import { paths } from 'src/routes/paths';
+import TripCompleted from 'src/pages/demo/section/trip-list/complete-trip/TripCompleted';
 
 // ----------------------------------------------------------------------
 
@@ -34,7 +32,7 @@ interface Result {
   TripDetail: TripDetail;
 }
 
-export default function TravelOrderCompletedView({ tripId }: Type) {
+export default function TripCompletedView({ tripId }: Type) {
   const isMdUp = useResponsive('up', 'md');
   const [loading, setLoading] = useState(true);
   const [tripDetails, setTripDetails] = useState<Result | null>(null);
@@ -84,7 +82,7 @@ export default function TravelOrderCompletedView({ tripId }: Type) {
 
         {/* <TravelOrderCompletedInfo tripDetails={tripDetails} /> */}
 
-        <TravelOrderCompletedSummary tripDetails={tripDetails} />
+        <TripCompleted tripDetails={tripDetails} />
 
         <Stack spacing={2.5} direction={{ xs: 'column', md: 'row' }} justifyContent="center">
           <Button

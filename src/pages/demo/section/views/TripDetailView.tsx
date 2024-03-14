@@ -13,15 +13,14 @@ import {
 // routes
 import { paths } from 'src/routes/paths';
 // api
-import { _socials, _tours } from 'src/_mock';
 import { getDetailTrip } from 'src/api/Trip/Trip';
 // types
 import { Result } from 'src/types/trips';
 // components
 import LoadingScreen from 'src/components/loading-screen';
-import TravelTourDetailsHeader from '../trip-list/trip-detail/TripDetailHeader';
-import TravelTourDetailsReserveForm from '../trip-list/trip-detail/TripDetailForm';
 import MapComponent from 'src/components/MapComponent';
+import TripDetailForm from '../trip-list/trip-detail/TripDetailForm';
+import TripDetailHeader from '../trip-list/trip-detail/TripDetailHeader';
 //
 
 // ----------------------------------------------------------------------
@@ -65,10 +64,10 @@ export default function TripDetailView({ tripId }: Type) {
         {tripDetails && (
           <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse">
             <Grid xs={12} md={5} lg={4}>
-              <TravelTourDetailsReserveForm tripDetails={tripDetails} tripId={tripDetails.TripId} />
+              <TripDetailForm tripDetails={tripDetails} tripId={tripDetails.TripId} />
             </Grid>
             <Grid xs={12} md={7} lg={8}>
-              <TravelTourDetailsHeader tripDetails={tripDetails} />
+              <TripDetailHeader tripDetails={tripDetails} />
               <MapComponent tripId={tripDetails.TripId} />
               <Divider sx={{ borderStyle: 'dashed', my: 5 }} />
             </Grid>

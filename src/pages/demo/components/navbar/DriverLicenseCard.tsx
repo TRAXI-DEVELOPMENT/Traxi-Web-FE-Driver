@@ -10,7 +10,6 @@ const DriverLicenseCard: React.FC<DriverLicenseCardProps> = ({ degreeId }) => {
     const fetchDriverDetails = async () => {
       try {
         const response = await getDriverDegree(degreeId);
-        console.log('đây nè', response);
         if (response.result && response.result.length > 0) {
           setDriverDetails(response.result[0]);
         }

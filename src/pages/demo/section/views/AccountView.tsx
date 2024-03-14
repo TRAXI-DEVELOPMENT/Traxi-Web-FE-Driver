@@ -11,8 +11,6 @@ import {
   Typography,
   InputAdornment,
 } from '@mui/material';
-// _mock
-import _mock from 'src/_mock';
 // types
 import { TripsDriver } from 'src/types/trips';
 // api

@@ -7,11 +7,11 @@ import DriverProfile from '../../section/views/DriverProfile';
 
 // ----------------------------------------------------------------------
 
-HistoryPage.getLayout = (page: React.ReactElement) => <MainLayout>{page}</MainLayout>;
+ProfilePage.getLayout = (page: React.ReactElement) => <MainLayout>{page}</MainLayout>;
 
 // ----------------------------------------------------------------------
 
-export default function HistoryPage() {
+export default function ProfilePage() {
   return (
     <>
       <DriverProfile />

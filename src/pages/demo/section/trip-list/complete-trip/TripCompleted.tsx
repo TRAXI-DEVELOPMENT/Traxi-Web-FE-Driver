@@ -13,7 +13,7 @@ type Props = {
   tripDetails: Result;
 };
 
-export default function TravelOrderCompletedSummary({ tripDetails }: Props) {
+export default function TripCompleted({ tripDetails }: Props) {
   const { BookingDate, TripDetail } = tripDetails;
   return (
     <Stack

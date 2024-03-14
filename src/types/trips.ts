@@ -1,6 +1,3 @@
-import { IAuthorProps } from './author';
-import { ISocialLinks } from './socials';
-
 // ----------------------------------------------------------------------
 
 export interface Result {

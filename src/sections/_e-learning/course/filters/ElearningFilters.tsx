@@ -18,7 +18,6 @@ import {
   ElearningFilterRating,
   ElearningFilterLanguage,
   ElearningFilterDuration,
-  ElearningFilterCategories,
 } from './components';
 
 // ----------------------------------------------------------------------
@@ -128,12 +127,6 @@ export default function ElearningFilters({ mobileOpen, onMobileClose }: Props) {
         />
       </Block>
 
-      <Block title="Category">
-        <ElearningFilterCategories
-          filterCategories={filters.filterCategories}
-          onChangeCategory={handleChangeCategory}
-        />
-      </Block>
 
       <Block title="Level">
         <ElearningFilterLevel filterLevel={filters.filterLevel} onChangeLevel={handleChangeLevel} />

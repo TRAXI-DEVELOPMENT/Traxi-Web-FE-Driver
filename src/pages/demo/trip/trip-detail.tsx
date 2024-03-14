@@ -11,11 +11,11 @@ import TripDetailView from '../section/views/TripDetailView';
 
 // ----------------------------------------------------------------------
 
-TravelTourPage.getLayout = (page: React.ReactElement) => <MainLayout>{page}</MainLayout>;
+TripDetailPage.getLayout = (page: React.ReactElement) => <MainLayout>{page}</MainLayout>;
 
 // ----------------------------------------------------------------------
 
-export default function TravelTourPage() {
+export default function TripDetailPage() {
   const router = useRouter();
   const { tripId } = router.query;
   const [tripDetails, setTripDetails] = useState(null);
