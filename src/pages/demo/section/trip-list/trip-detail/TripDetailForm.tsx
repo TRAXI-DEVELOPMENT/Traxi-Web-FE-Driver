@@ -23,9 +23,13 @@ type Props = {
 export default function TripDetailForm({ tripDetails }: Props) {
   const { push } = useRouter();
 
-  const { TripDetail } = tripDetails;
+  const TripDetail = tripDetails?.TripDetail;
 
   const handleCompleteTrip = async () => {
+    if (!TripDetail) {
+      console.error('TripDetail is undefined');
+      return;
+    }
     try {
       await tripComplete(TripDetail.TripId);
       push(`${paths.democompletedtrip}?tripId=${TripDetail.TripId}`);
@@ -33,6 +37,10 @@ export default function TripDetailForm({ tripDetails }: Props) {
       console.error('Failed to complete trip', error);
     }
   };
+
+  if (!TripDetail) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Card>
