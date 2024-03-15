@@ -17,14 +17,11 @@ import {
   Unstable_Grid2 as Grid,
 } from '@mui/material';
 // hooks
-import useResponsive from 'src/hooks/useResponsive';
+
 // components
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 //
-import { pageLinks, navConfig } from '../nav/config-navigation';
-import ListDesktop from './ListDesktop';
-import ListMobile from './ListMobile';
 
 // ----------------------------------------------------------------------
 
@@ -43,18 +40,8 @@ const StyledAppStoreButton = styled(Button)(({ theme }) => ({
 // ----------------------------------------------------------------------
 
 export default function Footer() {
-  const isMdUp = useResponsive('up', 'md');
-
   const { pathname } = useRouter();
-
-  const mobileList = navConfig.find((i) => i.title === 'Pages')?.children || [];
-
-  const desktopList = pageLinks.sort((listA, listB) => Number(listA.order) - Number(listB.order));
-
-  const renderLists = isMdUp ? desktopList : mobileList;
-
   const isHome = pathname === '/';
-
   const simpleFooter = (
     <Container sx={{ py: 8, textAlign: 'center' }}>
       <Logo single />
@@ -125,37 +112,10 @@ export default function Footer() {
               </Stack>
 
               <Stack spacing={2}>
-                <Typography variant="h6">Social</Typography>
-                <Stack direction="row" alignItems="center">
-                  {_socials.map((social) => (
-                    <IconButton key={social.value} color="primary">
-                      <Iconify icon={social.icon} />
-                    </IconButton>
-                  ))}
-                </Stack>
-              </Stack>
-
-              <Stack spacing={2}>
                 <Typography variant="h6">Apps</Typography>
                 <AppStoreButton />
               </Stack>
             </Stack>
-          </Grid>
-
-          <Grid xs={12} md={6}>
-            {isMdUp ? (
-              <Masonry columns={4} spacing={2} defaultColumns={4} defaultSpacing={2}>
-                {renderLists.map((list) => (
-                  <ListDesktop key={list.subheader} list={list} />
-                ))}
-              </Masonry>
-            ) : (
-              <Stack spacing={1.5}>
-                {renderLists.map((list) => (
-                  <ListMobile key={list.subheader} list={list} />
-                ))}
-              </Stack>
-            )}
           </Grid>
         </Grid>
       </Container>
