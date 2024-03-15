@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { io } from 'socket.io-client';
 
 interface TripDetail {
@@ -17,9 +17,10 @@ interface TripData {
 
 const TripComponent: React.FC = () => {
   const [trips, setTrips] = useState<TripData[]>([]);
-  const socket = io('http://localhost:5000');
+  const socketRef = useRef(io('http://localhost:5000'));
 
   useEffect(() => {
+    const socket = socketRef.current;
     socket.emit('tripData', (data: TripData[]) => {
       console.log('Nhận dữ liệu tripData:', data);
       setTrips(data);
