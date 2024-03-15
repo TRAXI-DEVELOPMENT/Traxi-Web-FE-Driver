@@ -26,8 +26,8 @@ type Props = {
 export default function TripDetailForm({ tripDetails }: Props) {
   const { push } = useRouter();
   const [customerInfo, setCustomerInfo] = useState<ICustomerInfo | null>(null);
-  const { CustomerId } = tripDetails;
-  const TripDetail = tripDetails?.TripDetail;
+  const CustomerId = tripDetails ? tripDetails.CustomerId : null;
+  const TripDetail = tripDetails ? tripDetails.TripDetail : null;
 
   const handleCompleteTrip = async () => {
     if (!TripDetail) {
