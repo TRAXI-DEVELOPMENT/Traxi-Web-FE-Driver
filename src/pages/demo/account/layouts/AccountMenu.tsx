@@ -36,14 +36,14 @@ const navigations = [
     icon: <Iconify icon="fa:drivers-license-o" />,
   },
   {
+    title: 'Lịch sử cuốc',
+    path: paths.demohistory,
+    icon: <Iconify icon="raphael:history" />,
+  },
+  {
     title: 'Danh sách công việc',
     path: paths.demotriplist,
     icon: <Iconify icon="solar:document-broken" />,
-  },
-  {
-    title: 'Lịch sử cuốc',
-    path: paths.demohistory,
-    icon: <Iconify icon="ic:twotone-history" />,
   },
 ];
 

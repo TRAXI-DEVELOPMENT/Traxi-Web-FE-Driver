@@ -63,7 +63,7 @@ export default function MapComponent({ tripId }: MapComponentProps) {
   }, [tripId]);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyAks5cOg8sKcIJntdMm_M3YtDnf2-VIvT8',
+    googleMapsApiKey: 'AIzaSyD_LsiwHrTmyCOuXjdUql2fCqKhKSQJDNA',
   });
 
   const mapRef = createRef<GoogleMap>();
