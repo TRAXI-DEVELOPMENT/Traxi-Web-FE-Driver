@@ -3,9 +3,10 @@ import NextLink from 'next/link';
 // @mui
 import { Link, Stack, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+// routes
+import { paths } from 'src/routes/paths'; // Đảm bảo rằng nhập khẩu này xuất hiện trước
 // components
-import AuthLoginForm from '../components/AuthLoginForm';
-import { paths } from 'src/routes/paths';
+import AuthLoginForm from '../components/AuthLoginForm'; // Đưa nhập khẩu này xuống sau các nhập khẩu khác
 
 // ----------------------------------------------------------------------
 
