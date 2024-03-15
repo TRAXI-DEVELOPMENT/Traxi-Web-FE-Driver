@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import useSocket from '../hooks/useSocket';
-import { io } from 'socket.io-client';
+import { io } from 'socket.io-client'; // Đã chuyển lên trước
 
 interface TripDetail {
   Id: string;
@@ -28,6 +27,20 @@ const TripComponent: React.FC = () => {
       });
 
       return () => {
+        useEffect(() => {
+          if (socket) {
+            socket.emit('tripData', (data: TripData[]) => {
+              console.log('Nhận dữ liệu tripData:', data);
+              setTrips(data);
+            });
+
+            return () => {
+              socket.off('tripData');
+            };
+          }
+
+          return () => {};
+        }, [socket]);
         socket.off('tripData');
       };
     }

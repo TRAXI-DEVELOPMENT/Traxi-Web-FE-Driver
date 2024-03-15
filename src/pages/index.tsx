@@ -1,10 +1,10 @@
 // next
 import Head from 'next/head';
 // layouts
-import TripListView from './demo/section/views/TripListView';
-import FileUploadPage from 'src/components/FileUploadPage';
 import MainLayout from 'src/layouts/main';
 // sections
+import TripListView from './demo/section/views/TripListView';
+// import FileUploadPage from 'src/components/FileUploadPage';
 
 // ----------------------------------------------------------------------
 

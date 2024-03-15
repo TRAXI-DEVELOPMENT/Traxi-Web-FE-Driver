@@ -31,7 +31,7 @@ const FileUploadPage: React.FC = () => {
     <div>
       <h2>Tải File lên</h2>
       <input type="file" onChange={handleFileChange} disabled={uploading} />
-      <button onClick={handleUpload} disabled={uploading || !selectedFile}>
+      <button onClick={handleUpload} disabled={uploading || !selectedFile} type="button">
         {uploading ? 'Đang tải...' : 'Tải lên'}
       </button>
       {message && <p>{message}</p>}
