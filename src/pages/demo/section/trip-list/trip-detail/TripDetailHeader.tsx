@@ -25,12 +25,13 @@ type Props = {
 };
 
 export default function TripDetailHeader({ tripDetails }: Props) {
+  // Chuyển useState ra ngoài khối điều kiện
+  const [open, setOpen] = useState<HTMLElement | null>(null);
+
   if (!tripDetails) {
     return <div>Loading...</div>;
   }
   const { TripId, BookingDate, Status, UpDate, CustomerId, DriverId, TripDetail } = tripDetails;
-
-  const [open, setOpen] = useState<HTMLElement | null>(null);
 
   const handleClose = () => {
     setOpen(null);
