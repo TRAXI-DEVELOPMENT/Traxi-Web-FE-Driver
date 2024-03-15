@@ -60,10 +60,27 @@ export default function TripItem({ trip, vertical }: Props) {
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
-  const showErrorModal = (message: string) => {
-    setErrorMessage(message);
-    setIsErrorModalOpen(true);
-  };
+  useEffect(() => {
+    if (!trip || !trip.CustomerId) return;
+    getCustomerInfo(trip.CustomerId)
+      .then((info) => {
+        setCustomerInfo(info);
+      })
+      .catch((error) => {
+        console.error('Failed to fetch customer info:', error);
+      });
+  }, [trip, trip?.CustomerId]);
+
+  useEffect(() => {
+    if (!trip || !trip.Id) return;
+    getDetailVehiclesByTrip(trip.Id)
+      .then((data) => {
+        setVehicleInfo(data);
+      })
+      .catch((error) => {
+        console.error('Lỗi khi lấy thông tin xe:', error);
+      });
+  }, [trip, trip?.Id]);
 
   if (!trip || !trip.tripDetails) {
     return <div>Loading...</div>;
@@ -71,27 +88,10 @@ export default function TripItem({ trip, vertical }: Props) {
 
   const { Id, BookingDate, Status, UpDate, CustomerId, DriverId, tripDetails } = trip;
 
-  useEffect(() => {
-    if (CustomerId) {
-      getCustomerInfo(CustomerId)
-        .then((info) => {
-          setCustomerInfo(info);
-        })
-        .catch((error) => {
-          console.error('Failed to fetch customer info:', error);
-        });
-    }
-  }, [CustomerId]);
-
-  useEffect(() => {
-    getDetailVehiclesByTrip(Id)
-      .then((data) => {
-        setVehicleInfo(data);
-      })
-      .catch((error) => {
-        console.error('Lỗi khi lấy thông tin xe:', error);
-      });
-  }, [Id]);
+  const showErrorModal = (message: string) => {
+    setErrorMessage(message);
+    setIsErrorModalOpen(true);
+  };
 
   const handleBookingTrip = async () => {
     try {
