@@ -60,7 +60,7 @@ export default function DriverProfile() {
         <TextField
           id="outlined-read-only-input"
           label="Số điện thoại"
-          value={driverData.phone} // Sử dụng giá trị từ state driverData
+          value={driverData.phone}
           InputProps={{
             readOnly: true,
           }}
@@ -68,7 +68,7 @@ export default function DriverProfile() {
         <TextField
           id="outlined-read-only-input"
           label="Địa chỉ"
-          value={driverData.address} // Sử dụng giá trị từ state driverData
+          value={driverData.address}
           InputProps={{
             readOnly: true,
           }}
@@ -76,7 +76,7 @@ export default function DriverProfile() {
         <TextField
           id="outlined-read-only-input"
           label="Bằng lái"
-          value={driverData.degreeId} // Sử dụng giá trị từ state driverData
+          value={driverData.degreeId}
           InputProps={{
             readOnly: true,
           }}

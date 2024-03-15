@@ -1,4 +1,4 @@
-import { format, getTime, formatDistanceToNow } from 'date-fns';
+import { format, getTime, parse, formatDistanceToNow } from 'date-fns';
 
 // ----------------------------------------------------------------------
 
@@ -30,9 +30,6 @@ export function fToNow(date: InputValue) {
 
 export function formatDate(dateString: string): string {
   const date = new Date(dateString);
-
-  // Định dạng ngày giờ theo yêu cầu: "16/02/2024 | 04:33"
-  // Lưu ý: Bạn có thể cần điều chỉnh 'en-GB' tùy thuộc vào locale mong muốn
   const formattedDate = date
     .toLocaleString('en-GB', {
       day: '2-digit',
@@ -45,4 +42,10 @@ export function formatDate(dateString: string): string {
     .replace(',', ' |');
 
   return formattedDate;
+}
+
+export function fCustomFormatDate(date: InputValue) {
+  if (!date) return '';
+  const parsedDate = parse(date.toString(), 'MMM dd yyyy hh:mma', new Date());
+  return format(parsedDate, "'Ngày' dd 'tháng' MM 'năm' yyyy");
 }
