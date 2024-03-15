@@ -39,7 +39,7 @@ export default function TripDetailForm({ tripDetails }: Props) {
       await createTransaction({
         Amount: TripDetail.TotalPrice,
         Action: 'payment',
-        CustomerId: CustomerId,
+        CustomerId,
         TripId: TripDetail.TripId,
         Method: 'Tiền mặt',
       });
