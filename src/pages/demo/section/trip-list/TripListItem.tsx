@@ -57,8 +57,6 @@ export default function TripItem({ trip, vertical }: Props) {
   const [vehicleInfo, setVehicleInfo] = useState<IVehicleInfo | null>(null);
   const driverId = useDriverInfo();
   const router = useRouter();
-  const { Id, BookingDate, Status, UpDate, CustomerId, DriverId, tripDetails } = trip;
-
   const [isErrorModalOpen, setIsErrorModalOpen] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -66,6 +64,12 @@ export default function TripItem({ trip, vertical }: Props) {
     setErrorMessage(message);
     setIsErrorModalOpen(true);
   };
+
+  if (!trip || !trip.tripDetails) {
+    return <div>Loading...</div>;
+  }
+
+  const { Id, BookingDate, Status, UpDate, CustomerId, DriverId, tripDetails } = trip;
 
   useEffect(() => {
     if (CustomerId) {
@@ -110,10 +114,6 @@ export default function TripItem({ trip, vertical }: Props) {
       }
     }
   };
-
-  if (!trip) {
-    return <div>Thông tin chuyến đi không tồn tại.</div>;
-  }
 
   return (
     <Card

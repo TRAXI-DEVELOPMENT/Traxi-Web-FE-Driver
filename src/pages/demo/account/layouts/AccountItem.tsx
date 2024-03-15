@@ -25,11 +25,7 @@ export default function AccountItem({ tripsDriver }: Props) {
   const [status, setStatus] = useState<string | null>(null);
   const router = useRouter();
 
-  const { BookingDate } = tripsDriver;
-
   useEffect(() => {
-    if (!tripsDriver) return; // Sử dụng điều kiện bên trong useEffect thay vì bao quanh việc gọi useEffect
-
     setLoading(true);
     getDetailTrip(tripsDriver.Id)
       .then((data) => {
@@ -46,6 +42,8 @@ export default function AccountItem({ tripsDriver }: Props) {
   if (!tripsDriver) {
     return <div>Loading or error message...</div>;
   }
+
+  const { BookingDate } = tripsDriver;
 
   let statusColor = 'inherit';
   switch (tripsDriver.Status) {
