@@ -1,7 +1,6 @@
 // next
-import Head from 'next/head';
 import { useRouter } from 'next/router';
-import React, { useRef, useEffect, useState } from 'react';
+import { createRef, useEffect, useState } from 'react';
 // api
 import { getDetailTrip } from 'src/api/Trip/Trip';
 // layouts
@@ -67,7 +66,7 @@ export default function MapComponent({ tripId }: MapComponentProps) {
     googleMapsApiKey: 'AIzaSyAks5cOg8sKcIJntdMm_M3YtDnf2-VIvT8',
   });
 
-  const mapRef = useRef<GoogleMap>();
+  const mapRef = createRef<GoogleMap>();
 
   useEffect(() => {
     if (!isLoaded || !tripDetails || !tripDetails.TripDetail) return;
