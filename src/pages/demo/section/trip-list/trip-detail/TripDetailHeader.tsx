@@ -12,13 +12,9 @@ import {
   IconButton,
 } from '@mui/material';
 import CircleIcon from '@mui/icons-material/Circle';
-import CarCrashIcon from '@mui/icons-material/CarCrash';
-// utils
-import { fShortenNumber } from 'src/utils/formatNumber';
 // types
 import { Result } from 'src/types/trips';
 // components
-import Iconify from 'src/components/iconify';
 import Image from 'src/components/image';
 import { Icon } from '@iconify/react';
 
@@ -29,6 +25,9 @@ type Props = {
 };
 
 export default function TripDetailHeader({ tripDetails }: Props) {
+  if (!tripDetails) {
+    return <div>Loading...</div>;
+  }
   const { TripId, BookingDate, Status, UpDate, CustomerId, DriverId, TripDetail } = tripDetails;
 
   const [open, setOpen] = useState<HTMLElement | null>(null);

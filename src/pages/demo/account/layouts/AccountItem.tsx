@@ -19,6 +19,11 @@ type Props = {
 };
 
 export default function AccountItem({ tripsDriver }: Props) {
+  if (!tripsDriver) {
+    // Trả về một component hoặc null nếu không có dữ liệu
+    return <div>Loading or error message...</div>;
+  }
+
   // Di chuyển các lời gọi Hooks ra ngoài bất kỳ khối lệnh điều kiện nào
   const [loading, setLoading] = useState(true);
   const [tripDetails, setTripDetails] = useState<TripDetail | null>(null);
@@ -28,8 +33,6 @@ export default function AccountItem({ tripsDriver }: Props) {
   const { BookingDate } = tripsDriver;
 
   useEffect(() => {
-    if (!tripsDriver) return; // Sử dụng điều kiện bên trong useEffect thay vì bao quanh việc gọi useEffect
-
     setLoading(true);
     getDetailTrip(tripsDriver.Id)
       .then((data) => {

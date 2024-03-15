@@ -64,7 +64,7 @@ export default function TripDetailView({ tripId }: Type) {
         {tripDetails && (
           <Grid container columnSpacing={8} rowSpacing={5} direction="row-reverse">
             <Grid xs={12} md={5} lg={4}>
-              <TripDetailForm tripDetails={tripDetails} tripId={tripDetails.TripId} />
+              <TripDetailForm tripDetails={tripDetails} />
             </Grid>
             <Grid xs={12} md={7} lg={8}>
               <TripDetailHeader tripDetails={tripDetails} />

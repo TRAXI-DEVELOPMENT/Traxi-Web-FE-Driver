@@ -68,12 +68,10 @@ export default function AccountView() {
           md: 'repeat(2, 1fr)',
         }}
       >
-        {tripsDriver && (
-          <Suspense fallback={<div>Loading...</div>}>
-            {tripsDriver.map((trip) => (
-              <AccountItem key={trip.Id} tripsDriver={trip} />
-            ))}
-          </Suspense>
+        {tripsDriver ? (
+          tripsDriver.map((trip) => <AccountItem key={trip.Id} tripsDriver={trip} />)
+        ) : (
+          <div>Loading...</div>
         )}
       </Box>
     </AccountLayout>

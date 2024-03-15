@@ -18,10 +18,9 @@ import { tripComplete } from 'src/api/Trip/CompleteTrip';
 
 type Props = {
   tripDetails: Result;
-  tripId: string;
 };
 
-export default function TripDetailForm({ tripDetails, tripId }: Props) {
+export default function TripDetailForm({ tripDetails }: Props) {
   const { push } = useRouter();
 
   const { TripDetail } = tripDetails;

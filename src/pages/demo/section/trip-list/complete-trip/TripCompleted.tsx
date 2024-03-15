@@ -12,8 +12,11 @@ import { Result } from 'src/types/trips';
 type Props = {
   tripDetails: Result;
 };
-
 export default function TripCompleted({ tripDetails }: Props) {
+  if (!tripDetails) {
+    return <div>Đang tải thông tin chuyến đi...</div>;
+  }
+
   const { BookingDate, TripDetail } = tripDetails;
   return (
     <Stack

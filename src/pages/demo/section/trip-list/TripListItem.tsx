@@ -111,6 +111,10 @@ export default function TripItem({ trip, vertical }: Props) {
     }
   };
 
+  if (!trip) {
+    return <div>Thông tin chuyến đi không tồn tại.</div>;
+  }
+
   return (
     <Card
       sx={{
