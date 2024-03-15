@@ -36,13 +36,15 @@ export default function TripDetailForm({ tripDetails }: Props) {
     }
     try {
       await tripComplete(TripDetail.TripId);
-      await createTransaction({
-        Amount: TripDetail.TotalPrice,
-        Action: 'payment',
-        CustomerId,
-        TripId: TripDetail.TripId,
-        Method: 'Tiền mặt',
-      });
+      if (CustomerId !== null) {
+        await createTransaction({
+          Amount: TripDetail.TotalPrice,
+          Action: 'payment',
+          CustomerId,
+          TripId: TripDetail.TripId,
+          Method: 'Tiền mặt',
+        });
+      }
       push(`${paths.democompletedtrip}?tripId=${TripDetail.TripId}`);
     } catch (error) {
       console.error('Failed to complete trip', error);
@@ -50,13 +52,15 @@ export default function TripDetailForm({ tripDetails }: Props) {
   };
 
   useEffect(() => {
-    getCustomerInfo(CustomerId)
-      .then((info) => {
-        setCustomerInfo(info);
-      })
-      .catch((error) => {
-        console.error('Failed to fetch customer info:', error);
-      });
+    if (CustomerId !== null) {
+      getCustomerInfo(CustomerId)
+        .then((info) => {
+          setCustomerInfo(info);
+        })
+        .catch((error) => {
+          console.error('Failed to fetch customer info:', error);
+        });
+    }
   }, [CustomerId]);
 
   if (!TripDetail) {
