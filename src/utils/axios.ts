@@ -33,15 +33,15 @@ const account = `${API_ROOT}`;
 
 const requestWebDriver = axios.create({
   baseURL: account,
-  paramsSerializer: parseParams
+  paramsSerializer: parseParams,
 });
 
 requestWebDriver.interceptors.request.use((options) => {
-  const { method } = options;
+  const { method, data } = options;
 
-  if (method === 'put' || method === 'post') {
+  if (!(data instanceof FormData) && (method === 'put' || method === 'post')) {
     Object.assign(options.headers, {
-      'Content-Type': 'application/json;charset=UTF-8'
+      'Content-Type': 'application/json;charset=UTF-8',
     });
   }
 

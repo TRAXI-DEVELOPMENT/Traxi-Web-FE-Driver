@@ -3,17 +3,18 @@ import Head from 'next/head';
 // layouts
 import SimpleLayout from 'src/layouts/simple';
 // sections
-import DemoLoginView from '../section/auth/views/LoginView';
-// ----------------------------------------------------------------------
-
-LoginPage.getLayout = (page: React.ReactElement) => <SimpleLayout>{page}</SimpleLayout>;
+import RegisterView from '../section/auth/views/RegisterView';
 
 // ----------------------------------------------------------------------
 
-export default function LoginPage() {
+RegisterPage.getLayout = (page: React.ReactElement) => <SimpleLayout>{page}</SimpleLayout>;
+
+// ----------------------------------------------------------------------
+
+export default function RegisterPage() {
   return (
     <>
-      <DemoLoginView />
+      <RegisterView />
     </>
   );
 }

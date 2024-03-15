@@ -32,6 +32,8 @@ import ProgressBar from 'src/components/progress-bar';
 import { ThemeSettings, SettingsProvider } from 'src/components/settings';
 import MotionLazyContainer from 'src/components/animate/MotionLazyContainer';
 import { AuthProvider } from 'src/contexts/JWTContexts';
+import useRequireAuth from 'src/hooks/useRequireAuth'; // Import hook
+import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -48,6 +50,10 @@ export interface MyAppProps extends AppProps {
 
 export default function MyApp(props: MyAppProps) {
   const { Component, pageProps, emotionCache = clientSideEmotionCache } = props;
+
+  // Danh sách các đường dẫn không yêu cầu xác thực
+  const excludePaths = [paths.demologin, paths.demoregister];
+  useRequireAuth(excludePaths); // Sử dụng hook với danh sách loại trừ
 
   const getLayout = Component.getLayout ?? ((page) => page);
 

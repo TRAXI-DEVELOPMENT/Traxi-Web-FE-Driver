@@ -1,8 +1,11 @@
+// next
+import NextLink from 'next/link';
 // @mui
-import { Stack, Typography } from '@mui/material';
+import { Link, Stack, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 // components
 import AuthLoginForm from '../components/AuthLoginForm';
+import { paths } from 'src/routes/paths';
 
 // ----------------------------------------------------------------------
 
@@ -40,6 +43,18 @@ export default function DemoLoginView() {
         <div>
           <Typography variant="h3" paragraph>
             Đăng nhập
+          </Typography>
+
+          <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+            {`Bạn chưa chưa có tài khoản? `}
+            <Link
+              component={NextLink}
+              href={paths.demoregister}
+              variant="subtitle2"
+              color="primary"
+            >
+              Ứng tuyển ngay
+            </Link>
           </Typography>
         </div>
 
