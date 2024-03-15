@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Box, Typography, Stack, TextField } from '@mui/material';
-import EcommerceAccountLayout from '../../account/layouts/AccountLayout';
 import { useDriverInfo } from 'src/hooks/useDriverInfo';
 import { getDriverInfo } from 'src/api/Driver/Driver';
+import EcommerceAccountLayout from '../../account/layouts/AccountLayout';
 import DriverLicenseCard from '../../components/navbar/DriverLicenseCard';
 
 // ----------------------------------------------------------------------

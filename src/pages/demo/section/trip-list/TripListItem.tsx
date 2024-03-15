@@ -92,7 +92,7 @@ export default function TripItem({ trip, vertical }: Props) {
   const handleBookingTrip = async () => {
     try {
       const response = await BookingTrip({
-        driverId: driverId,
+        driverId,
         tripId: Id,
       });
       if (response.error) {
