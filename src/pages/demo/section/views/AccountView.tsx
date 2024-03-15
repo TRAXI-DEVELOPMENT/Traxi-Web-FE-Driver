@@ -41,10 +41,11 @@ export default function AccountView() {
       if (!userId) return;
 
       try {
-        let data = await getDetailTripByDriver(userId);
-        data.sort((a: TripsDriver, b: TripsDriver) => {
-          return new Date(b.BookingDate).getTime() - new Date(a.BookingDate).getTime();
-        });
+        const data = await getDetailTripByDriver(userId); // Sửa 'let' thành 'const'
+        data.sort(
+          (a: TripsDriver, b: TripsDriver) =>
+            new Date(b.BookingDate).getTime() - new Date(a.BookingDate).getTime() // Sửa cú pháp hàm arrow
+        );
         setTripsDriver(data);
       } catch (error) {
         console.error('Failed to fetch trip details:', error);

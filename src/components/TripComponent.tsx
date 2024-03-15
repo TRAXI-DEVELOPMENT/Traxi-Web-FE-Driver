@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { io } from 'socket.io-client'; // Đã chuyển lên trước
+import { io } from 'socket.io-client';
 
 interface TripDetail {
   Id: string;
@@ -8,7 +8,7 @@ interface TripDetail {
   UpDate: string;
   CustomerId: string;
   DriverId: string | null;
-  tripDetails: any; // Thay thế `any` bằng kiểu dữ liệu cụ thể nếu bạn biết
+  tripDetails: any;
 }
 
 interface TripData {
@@ -16,35 +16,18 @@ interface TripData {
 }
 
 const TripComponent: React.FC = () => {
-  const socket = io('http://localhost:5000');
   const [trips, setTrips] = useState<TripData[]>([]);
+  const socket = io('http://localhost:5000');
 
   useEffect(() => {
-    if (socket) {
-      socket.emit('tripData', (data: TripData[]) => {
-        console.log('Nhận dữ liệu tripData:', data);
-        setTrips(data); // Lưu trữ dữ liệu vào state
-      });
-
-      return () => {
-        useEffect(() => {
-          if (socket) {
-            socket.emit('tripData', (data: TripData[]) => {
-              console.log('Nhận dữ liệu tripData:', data);
-              setTrips(data);
-            });
-
-            return () => {
-              socket.off('tripData');
-            };
-          }
-
-          return () => {};
-        }, [socket]);
-        socket.off('tripData');
-      };
-    }
-  }, [socket]);
+    socket.emit('tripData', (data: TripData[]) => {
+      console.log('Nhận dữ liệu tripData:', data);
+      setTrips(data);
+    });
+    return () => {
+      socket.off('tripData');
+    };
+  }, []);
 
   return (
     <div>
