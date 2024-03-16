@@ -13,26 +13,26 @@ import { useUpload } from 'src/contexts/UploadContext';
 
 export default function Review() {
   const { checkoutData } = useCheckout();
-  const { response } = useUpload();
-  // console.log('response', response.link_img);
+  const { response: uploadResponse } = useUpload(); // Đổi tên biến khi destructuring để tránh xung đột
+  // console.log('response', uploadResponse.link_img);
   React.useEffect(() => {
     const applyJob = async () => {
       try {
-        const response = await applyForJob({
+        const applyResponse = await applyForJob({ // Đổi tên biến response thành applyResponse
           Fullname: checkoutData.Fullname,
           Phone: checkoutData.Phone,
           Address: checkoutData.Address,
           Password: checkoutData.Password,
         });
-        const response2 = await postDriverDegree({
+        const degreeResponse = await postDriverDegree({ // Đổi tên biến response2 thành degreeResponse
           DriverId: '1573cd2a-a64a-4212-b1b5-d15f5a91a299',
           DateDegree: checkoutData.expirationDate ?? 'Giá trị mặc định',
           DegreeName: checkoutData.Fullname,
           Type: checkoutData.licenseType ?? 'Giá trị mặc định',
-          ImageUrl: response.link_img,
+          ImageUrl: applyResponse.link_img, // Sử dụng applyResponse ở đây
         });
 
-        console.log('Application response:', response, response2);
+        console.log('Application response:', applyResponse, degreeResponse);
       } catch (error) {
         console.error('Error applying for job:', error);
       }

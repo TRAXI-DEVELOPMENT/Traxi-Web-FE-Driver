@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useMemo } from 'react';
 
 const UploadContext = createContext<
   { response: any; setResponse: React.Dispatch<React.SetStateAction<any>> } | undefined
@@ -19,7 +19,12 @@ interface UploadProviderProps {
 export const UploadProvider: React.FC<UploadProviderProps> = ({ children }) => {
   const [response, setResponse] = useState<any>(null);
 
+  // Sử dụng useMemo để đối tượng value chỉ được tạo mới khi response thay đổi
+  const value = useMemo(() => ({ response, setResponse }), [response]);
+
   return (
-    <UploadContext.Provider value={{ response, setResponse }}>{children}</UploadContext.Provider>
+    <UploadContext.Provider value={value}>
+      {children}
+    </UploadContext.Provider>
   );
 };

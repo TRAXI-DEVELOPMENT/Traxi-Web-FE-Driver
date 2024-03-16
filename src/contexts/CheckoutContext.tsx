@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode, useMemo } from 'react';
 
 interface CheckoutData {
   Fullname: string;
@@ -30,8 +30,11 @@ export const CheckoutProvider: React.FC<CheckoutProviderProps> = ({ children }) 
     confirmPassword: '',
   });
 
+  // Sử dụng useMemo để đối tượng value chỉ được tạo mới khi checkoutData thay đổi
+  const value = useMemo(() => ({ checkoutData, setCheckoutData }), [checkoutData]);
+
   return (
-    <CheckoutContext.Provider value={{ checkoutData, setCheckoutData }}>
+    <CheckoutContext.Provider value={value}>
       {children}
     </CheckoutContext.Provider>
   );

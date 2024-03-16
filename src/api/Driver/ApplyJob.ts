@@ -9,10 +9,10 @@ export const applyForJob = async ({
 }: applyJob): Promise<any> => {
   try {
     const response = await requestWebDriver.post('/api/v1/driver/apply-job', {
-      Fullname: Fullname,
-      Phone: Phone,
-      Address: Address,
-      Password: Password,
+      Fullname,
+      Phone,
+      Address,
+      Password,
     });
     return response.data;
   } catch (error) {
@@ -30,11 +30,11 @@ export const postDriverDegree = async ({
 }: DriverDegreeProps) => {
   try {
     const response = await requestWebDriver.post('/api/v1/driverdegree', {
-      DriverId: DriverId,
-      DateDegree: DateDegree,
-      DegreeName: DegreeName,
-      Type: Type,
-      ImageUrl: ImageUrl,
+      DriverId,
+      DateDegree,
+      DegreeName,
+      Type,
+      ImageUrl,
     });
     return response.data;
   } catch (error) {

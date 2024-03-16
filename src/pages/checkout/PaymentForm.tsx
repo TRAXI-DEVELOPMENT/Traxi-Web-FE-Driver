@@ -118,16 +118,16 @@ export default function PaymentForm() {
                   Loại bằng lái
                 </InputLabel>
                 <NativeSelect
-                  defaultValue={'A1'}
+                  defaultValue="A1"
                   inputProps={{
                     name: 'licenseType',
                     id: 'uncontrolled-native',
                   }}
                   onChange={handleSelectChange}
                 >
-                  <option value={'A1'}>A1</option>
-                  <option value={'B1'}>B1</option>
-                  <option value={'B2'}>B2</option>
+                  <option value="A1">A1</option>
+                  <option value="B1">B1</option>
+                  <option value="B2">B2</option>
                 </NativeSelect>
               </FormControl>
             </Box>
