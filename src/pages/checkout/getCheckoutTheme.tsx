@@ -89,47 +89,32 @@ const getDesignTokens = (mode: PaletteMode) => ({
   palette: {
     mode,
     primary: {
-      light: brand[200],
       main: brand[500],
-      dark: brand[800],
-      contrastText: brand[50],
-      ...(mode === 'dark' && {
-        contrastText: brand[100],
-        light: brand[300],
-        main: brand[400],
-        dark: brand[800],
-      }),
+      light: brand[300],
+      dark: brand[700],
+      contrastText: '#ffffff',
     },
     secondary: {
-      light: secondary[300],
       main: secondary[500],
-      dark: secondary[800],
-      ...(mode === 'dark' && {
-        light: secondary[400],
-        main: secondary[500],
-        dark: secondary[900],
-      }),
+      light: secondary[300],
+      dark: secondary[700],
+      contrastText: '#ffffff',
     },
     warning: {
       main: '#F7B538',
       dark: '#F79F00',
-      ...(mode === 'dark' && { main: '#F7B538', dark: '#F79F00' }),
     },
     error: {
-      light: red[50],
       main: red[500],
+      light: red[300],
       dark: red[700],
-      ...(mode === 'dark' && { light: '#D32F2F', main: '#D32F2F', dark: '#B22A2A' }),
+      contrastText: '#ffffff',
     },
     success: {
-      light: green[300],
       main: green[400],
-      dark: green[800],
-      ...(mode === 'dark' && {
-        light: green[400],
-        main: green[500],
-        dark: green[700],
-      }),
+      light: green[300],
+      dark: green[700],
+      contrastText: '#ffffff',
     },
     grey: {
       50: gray[50],
