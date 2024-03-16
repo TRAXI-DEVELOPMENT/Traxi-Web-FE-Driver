@@ -1,7 +1,7 @@
 import type {} from '@mui/material/themeCssVarsAugmentation';
-import { ThemeOptions, alpha } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
+import { ThemeOptions, alpha, PaletteColorOptions } from '@mui/material/styles';
 import { PaletteMode } from '@mui/material';
+import { red } from '@mui/material/colors';
 
 declare module '@mui/material/styles/createPalette' {
   interface ColorRange {
@@ -85,7 +85,7 @@ export const orange = {
   900: '#3B2D02',
 };
 
-const getDesignTokens = (mode: PaletteMode) => ({
+const getDesignTokens = (mode: PaletteMode): ThemeOptions => ({
   palette: {
     mode,
     primary: {
@@ -93,29 +93,31 @@ const getDesignTokens = (mode: PaletteMode) => ({
       light: brand[300],
       dark: brand[700],
       contrastText: '#ffffff',
-    },
+    } as PaletteColorOptions,
     secondary: {
       main: secondary[500],
       light: secondary[300],
       dark: secondary[700],
       contrastText: '#ffffff',
-    },
+    } as PaletteColorOptions,
     warning: {
       main: '#F7B538',
       dark: '#F79F00',
-    },
+      light: '#F8C069',
+      contrastText: '#ffffff',
+    } as PaletteColorOptions,
     error: {
       main: red[500],
       light: red[300],
       dark: red[700],
       contrastText: '#ffffff',
-    },
+    } as PaletteColorOptions,
     success: {
       main: green[400],
       light: green[300],
       dark: green[700],
       contrastText: '#ffffff',
-    },
+    } as PaletteColorOptions,
     grey: {
       50: gray[50],
       100: gray[100],
@@ -282,10 +284,10 @@ export default function getCheckoutTheme(mode: PaletteMode): ThemeOptions {
                 color: brand[50],
                 backgroundColor: brand[500],
                 backgroundImage: `linear-gradient(to bottom, ${brand[400]}, ${brand[500]})`,
-                boxShadow: `inset 0 1px ${alpha(
-                  brand[300],
-                  0.5,
-                )}, inset 0 -2px ${alpha(brand[700], 0.5)}`,
+                boxShadow: `inset 0 1px ${alpha(brand[300], 0.5)}, inset 0 -2px ${alpha(
+                  brand[700],
+                  0.5
+                )}`,
                 border: `1px solid ${brand[500]}`,
                 '&:hover': {
                   backgroundColor: brand[400],
@@ -362,10 +364,7 @@ export default function getCheckoutTheme(mode: PaletteMode): ThemeOptions {
               outline: `1px solid ${alpha(gray[700], 0.3)}`,
               ...(ownerState.variant === 'outlined' && {
                 boxSizing: 'border-box',
-                background: `linear-gradient(to bottom, ${gray[900]}, ${alpha(
-                  gray[800],
-                  0.5,
-                )})`,
+                background: `linear-gradient(to bottom, ${gray[900]}, ${alpha(gray[800], 0.5)})`,
                 '&:hover': {
                   borderColor: brand[700],
                   boxShadow: `0 0 24px ${brand[800]}`,
