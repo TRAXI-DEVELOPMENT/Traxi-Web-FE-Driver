@@ -6,6 +6,7 @@ import FormLabel from '@mui/material/FormLabel';
 import Grid from '@mui/material/Grid';
 import OutlinedInput from '@mui/material/OutlinedInput';
 import { styled } from '@mui/system';
+import { useCheckout } from 'src/contexts/CheckoutContext';
 
 const FormGrid = styled(Grid)(() => ({
   display: 'flex',
@@ -13,35 +14,81 @@ const FormGrid = styled(Grid)(() => ({
 }));
 
 export default function AddressForm() {
+  const { checkoutData, setCheckoutData } = useCheckout();
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setCheckoutData({ ...checkoutData, [e.target.name]: e.target.value });
+  };
+
   return (
     <Grid container spacing={3}>
       <FormGrid item xs={12}>
         <FormLabel htmlFor="Fullname" required>
           Họ và tên
         </FormLabel>
-        <OutlinedInput id="Fullname" type="text" placeholder="Lê Văn A " required />
+        <OutlinedInput
+          id="Fullname"
+          name="Fullname"
+          type="text"
+          placeholder="Lê Văn A"
+          required
+          value={checkoutData.Fullname}
+          onChange={handleChange}
+        />
       </FormGrid>
       <FormGrid item xs={12}>
-        <FormLabel htmlFor="phone">Số điện thoại</FormLabel>
-        <OutlinedInput id="phone" type="tel" placeholder="0123456789" required />
+        <FormLabel htmlFor="Phone">Số điện thoại</FormLabel>
+        <OutlinedInput
+          id="Phone"
+          name="Phone"
+          type="tel"
+          placeholder="0123456789"
+          required
+          value={checkoutData.Phone}
+          onChange={handleChange}
+        />
       </FormGrid>
       <FormGrid item xs={12}>
-        <FormLabel htmlFor="address" required>
+        <FormLabel htmlFor="Address" required>
           Địa chỉ
         </FormLabel>
-        <OutlinedInput id="address" type="text" placeholder="Nơi cư trú" required />
+        <OutlinedInput
+          id="Address"
+          name="Address"
+          type="text"
+          placeholder="Nơi cư trú"
+          required
+          value={checkoutData.Address}
+          onChange={handleChange}
+        />
       </FormGrid>
       <FormGrid item xs={12}>
-        <FormLabel htmlFor="password" required>
+        <FormLabel htmlFor="s" required>
           Mật khẩu
         </FormLabel>
-        <OutlinedInput id="password" type="password" placeholder="Nhập mật khẩu" required />
+        <OutlinedInput
+          id="Password"
+          name="Password"
+          type="Password"
+          placeholder="Nhập mật khẩu"
+          required
+          value={checkoutData.Password}
+          onChange={handleChange}
+        />
       </FormGrid>
       <FormGrid item xs={12}>
         <FormLabel htmlFor="confirmPassword" required>
           Xác nhận mật khẩu
         </FormLabel>
-        <OutlinedInput id="confirmPassword" type="password" placeholder="Nhập lại mật khẩu" required />
+        <OutlinedInput
+          id="confirmPassword"
+          name="confirmPassword"
+          type="password"
+          placeholder="Nhập lại mật khẩu"
+          required
+          value={checkoutData.confirmPassword}
+          onChange={handleChange}
+        />
       </FormGrid>
     </Grid>
   );

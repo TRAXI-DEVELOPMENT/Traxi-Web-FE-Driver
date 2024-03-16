@@ -26,50 +26,13 @@ import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import { paths } from 'src/routes/paths';
 
 import AddressForm from './AddressForm';
-// import getCheckoutTheme from './getCheckoutTheme';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import ToggleColorMode from './ToggleColorMode';
 
-interface ToggleCustomThemeProps {
-  showCustomTheme: Boolean;
-  toggleCustomTheme: () => void;
-}
+import { CheckoutProvider, useCheckout } from 'src/contexts/CheckoutContext';
 
-function ToggleCustomTheme({ showCustomTheme, toggleCustomTheme }: ToggleCustomThemeProps) {
-  return (
-    <Box
-      sx={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '100dvw',
-        position: 'fixed',
-        bottom: 24,
-      }}
-    >
-      <ToggleButtonGroup
-        color="primary"
-        exclusive
-        value={showCustomTheme}
-        onChange={toggleCustomTheme}
-        aria-label="Platform"
-        sx={{
-          backgroundColor: 'background.default',
-          '& .Mui-selected': {
-            pointerEvents: 'none',
-          },
-        }}
-      >
-        <ToggleButton value>
-          <AutoAwesomeRoundedIcon sx={{ fontSize: '20px', mr: 1 }} />
-          Custom theme
-        </ToggleButton>
-        <ToggleButton value={false}>Material Design 2</ToggleButton>
-      </ToggleButtonGroup>
-    </Box>
-  );
-}
+import { applyForJob, postDriverDegree } from 'src/api/Driver/ApplyJob';
 
 const steps = ['Thông tin cá nhân', 'Tải lên giấy tờ', 'Xác nhận thông tin'];
 
@@ -96,7 +59,6 @@ function getStepContent(step: number) {
 export default function Checkout() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
-  // const checkoutTheme = createTheme(getCheckoutTheme(mode));
   const defaultTheme = createTheme({ palette: { mode } });
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -117,7 +79,6 @@ export default function Checkout() {
   };
 
   return (
-    // <ThemeProvider theme={showCustomTheme ? checkoutTheme : defaultTheme}>
     <>
       <CssBaseline />
       <Grid
@@ -243,7 +204,6 @@ export default function Checkout() {
                 </Button>
               </Stack>
             ) : (
-              // Sử dụng Fragment shorthand ở đây
               <>
                 {getStepContent(activeStep)}
                 <Box
@@ -301,6 +261,5 @@ export default function Checkout() {
         </Grid>
       </Grid>
     </>
-    // </ThemeProvider>
   );
 }

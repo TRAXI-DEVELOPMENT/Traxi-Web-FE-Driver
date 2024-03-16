@@ -1,5 +1,5 @@
 import * as React from 'react';
-
+import { useCheckout } from 'src/contexts/CheckoutContext'; // Giả sử đây là hook bạn đã tạo
 import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
 import List from '@mui/material/List';
@@ -8,23 +8,54 @@ import ListItemText from '@mui/material/ListItemText';
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import Iconify from 'src/components/iconify';
+import { applyForJob, postDriverDegree } from 'src/api/Driver/ApplyJob';
+import { useUpload } from 'src/contexts/UploadContext';
 
 export default function Review() {
+  const { checkoutData } = useCheckout();
+  const { response } = useUpload();
+  // console.log('response', response.link_img);
+  React.useEffect(() => {
+    const applyJob = async () => {
+      try {
+        const response = await applyForJob({
+          Fullname: checkoutData.Fullname,
+          Phone: checkoutData.Phone,
+          Address: checkoutData.Address,
+          Password: checkoutData.Password,
+        });
+        const response2 = await postDriverDegree({
+          DriverId: '1573cd2a-a64a-4212-b1b5-d15f5a91a299',
+          DateDegree: checkoutData.expirationDate ?? 'Giá trị mặc định',
+          DegreeName: checkoutData.Fullname,
+          Type: checkoutData.licenseType ?? 'Giá trị mặc định',
+          ImageUrl: response.link_img,
+        });
+
+        console.log('Application response:', response, response2);
+      } catch (error) {
+        console.error('Error applying for job:', error);
+      }
+    };
+
+    applyJob();
+  }, [checkoutData]);
+
   return (
     <Stack spacing={2}>
       <List disablePadding>
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Họ và tên" />
-          <Typography variant="body2">Lê Văn A</Typography>
+          <Typography variant="body2">{checkoutData.Fullname}</Typography>
         </ListItem>
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Nơi cư trú" />
-          <Typography variant="body2">Vietnam</Typography>
+          <Typography variant="body2">{checkoutData.Address}</Typography>
         </ListItem>
         <ListItem sx={{ py: 1, px: 0 }}>
           <ListItemText primary="Số điện thoại" />
           <Typography variant="subtitle1" sx={{ fontWeight: 700 }}>
-            0123456789
+            {checkoutData.Phone}
           </Typography>
         </ListItem>
       </List>
@@ -45,7 +76,7 @@ export default function Review() {
                 />
                 <ListItemText primary="Họ và tên" />
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                  Lê Văn A
+                  {checkoutData.Fullname}
                 </Typography>
               </ListItem>
               <ListItem sx={{ py: 1, px: 0 }}>
@@ -69,7 +100,7 @@ export default function Review() {
                 />
                 <ListItemText primary="Loại" />
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                  B2
+                  {checkoutData.licenseType}
                 </Typography>
               </ListItem>
               <ListItem sx={{ py: 1, px: 0 }}>
@@ -81,7 +112,7 @@ export default function Review() {
                 />
                 <ListItemText primary="Ngày cấp" />
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>
-                  03/16/2024
+                  {checkoutData.expirationDate}
                 </Typography>
               </ListItem>
             </Grid>

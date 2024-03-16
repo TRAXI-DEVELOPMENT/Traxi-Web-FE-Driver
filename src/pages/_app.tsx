@@ -34,6 +34,9 @@ import MotionLazyContainer from 'src/components/animate/MotionLazyContainer';
 import { AuthProvider } from 'src/contexts/JWTContexts';
 import useRequireAuth from 'src/hooks/useRequireAuth'; // Import hook
 import { paths } from 'src/routes/paths';
+import { CheckoutProvider } from 'src/contexts/CheckoutContext';
+import FileUploadPage from 'src/components/FileUploadPage';
+import { UploadProvider } from 'src/contexts/UploadContext';
 
 // ----------------------------------------------------------------------
 
@@ -58,27 +61,31 @@ export default function MyApp(props: MyAppProps) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return (
-    <CacheProvider value={emotionCache}>
-      <Head>
-        <meta name="viewport" content="initial-scale=1, width=device-width" />
-      </Head>
+    <UploadProvider>
+      <CheckoutProvider>
+        <CacheProvider value={emotionCache}>
+          <Head>
+            <meta name="viewport" content="initial-scale=1, width=device-width" />
+          </Head>
 
-      <LocalizationProvider dateAdapter={AdapterDateFns}>
-        <SettingsProvider>
-          <ThemeProvider>
-            <ThemeSettings>
-              <MotionLazyContainer>
-                <ProgressBar />
-                <AuthProvider>
-                  {' '}
-                  {/* Wrapped the getLayout call with AuthProvider */}
-                  {getLayout(<Component {...pageProps} />)}
-                </AuthProvider>
-              </MotionLazyContainer>
-            </ThemeSettings>
-          </ThemeProvider>
-        </SettingsProvider>
-      </LocalizationProvider>
-    </CacheProvider>
+          <LocalizationProvider dateAdapter={AdapterDateFns}>
+            <SettingsProvider>
+              <ThemeProvider>
+                <ThemeSettings>
+                  <MotionLazyContainer>
+                    <ProgressBar />
+                    <AuthProvider>
+                      {' '}
+                      {/* Wrapped the getLayout call with AuthProvider */}
+                      {getLayout(<Component {...pageProps} />)}
+                    </AuthProvider>
+                  </MotionLazyContainer>
+                </ThemeSettings>
+              </ThemeProvider>
+            </SettingsProvider>
+          </LocalizationProvider>
+        </CacheProvider>
+      </CheckoutProvider>
+    </UploadProvider>
   );
 }
