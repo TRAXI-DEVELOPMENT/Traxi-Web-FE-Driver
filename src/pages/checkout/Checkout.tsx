@@ -23,16 +23,17 @@ import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 
+// Đặt các import từ contexts và api trước các import của component
+import { CheckoutProvider, useCheckout } from 'src/contexts/CheckoutContext';
+import { applyForJob, postDriverDegree } from 'src/api/Driver/ApplyJob';
+
 import { paths } from 'src/routes/paths';
 
+// Sau đó là các import của component
 import AddressForm from './AddressForm';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import ToggleColorMode from './ToggleColorMode';
-
-import { CheckoutProvider, useCheckout } from 'src/contexts/CheckoutContext';
-
-import { applyForJob, postDriverDegree } from 'src/api/Driver/ApplyJob';
 
 const steps = ['Thông tin cá nhân', 'Tải lên giấy tờ', 'Xác nhận thông tin'];
 
