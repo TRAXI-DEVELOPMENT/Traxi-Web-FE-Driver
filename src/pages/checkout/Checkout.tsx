@@ -242,7 +242,8 @@ export default function Checkout() {
                 </Button>
               </Stack>
             ) : (
-              <React.Fragment>
+              // Sử dụng Fragment shorthand ở đây
+              <>
                 {getStepContent(activeStep)}
                 <Box
                   sx={{
@@ -293,7 +294,7 @@ export default function Checkout() {
                     {activeStep === steps.length - 1 ? 'Xác nhận thông tin' : 'Tiếp tục'}
                   </Button>
                 </Box>
-              </React.Fragment>
+              </>
             )}
           </Box>
         </Grid>
