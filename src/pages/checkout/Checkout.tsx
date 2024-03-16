@@ -26,7 +26,7 @@ import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 import { paths } from 'src/routes/paths';
 
 import AddressForm from './AddressForm';
-import getCheckoutTheme from './getCheckoutTheme';
+// import getCheckoutTheme from './getCheckoutTheme';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import ToggleColorMode from './ToggleColorMode';
@@ -96,7 +96,7 @@ function getStepContent(step: number) {
 export default function Checkout() {
   const [mode, setMode] = React.useState<PaletteMode>('light');
   const [showCustomTheme, setShowCustomTheme] = React.useState(true);
-  const checkoutTheme = createTheme(getCheckoutTheme(mode));
+  // const checkoutTheme = createTheme(getCheckoutTheme(mode));
   const defaultTheme = createTheme({ palette: { mode } });
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -117,7 +117,8 @@ export default function Checkout() {
   };
 
   return (
-    <ThemeProvider theme={showCustomTheme ? checkoutTheme : defaultTheme}>
+    // <ThemeProvider theme={showCustomTheme ? checkoutTheme : defaultTheme}>
+    <>
       <CssBaseline />
       <Grid
         container
@@ -299,6 +300,7 @@ export default function Checkout() {
           </Box>
         </Grid>
       </Grid>
-    </ThemeProvider>
+    </>
+    // </ThemeProvider>
   );
 }
