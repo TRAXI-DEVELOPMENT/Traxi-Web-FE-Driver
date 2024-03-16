@@ -23,12 +23,13 @@ import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 
+import { paths } from 'src/routes/paths';
+
 import AddressForm from './AddressForm';
 import getCheckoutTheme from './getCheckoutTheme';
 import PaymentForm from './PaymentForm';
 import Review from './Review';
 import ToggleColorMode from './ToggleColorMode';
-import { paths } from 'src/routes/paths';
 
 interface ToggleCustomThemeProps {
   showCustomTheme: Boolean;
@@ -153,16 +154,6 @@ export default function Checkout() {
               maxWidth: { sm: '100%', md: 600 },
             }}
           >
-            {/* <Box
-              sx={{
-                display: { xs: 'flex', md: 'none' },
-                flexDirection: 'row',
-                width: '100%',
-                justifyContent: 'space-between',
-              }}
-            >
-              <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} />
-            </Box> */}
             <Box
               sx={{
                 display: { xs: 'none', md: 'flex' },

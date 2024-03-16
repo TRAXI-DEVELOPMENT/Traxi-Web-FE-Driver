@@ -9,9 +9,9 @@ import useResponsive from 'src/hooks/useResponsive';
 // components
 import Image from 'src/components/image';
 //
-import AuthRegisterForm from '../components/AuthRegisterForm';
 import PaymentForm from 'src/pages/checkout/PaymentForm';
 import Checkout from 'src/pages/checkout/Checkout';
+import AuthRegisterForm from '../components/AuthRegisterForm'; // Đã di chuyển xuống đây
 
 // ----------------------------------------------------------------------
 
