@@ -75,7 +75,7 @@ export default function Header({ headerOnDark }: Props) {
             {isMdUp && <MenuAppBar />}
           </Stack>
 
-          {!isMdUp && <NavMobile data={navConfig} />}
+          {!isMdUp && <NavMobile />}
         </Container>
       </Toolbar>
 

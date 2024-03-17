@@ -11,7 +11,4 @@ export const pageLinks = [
   },
 ];
 
-export const navConfig = [
-  { title: 'Trang chủ', path: '/demo' },
-  
-];
+export const navConfig = [{ title: 'Trang chủ', path: '/' }];
