@@ -10,6 +10,7 @@ import {
   ListItemButton,
   ListItemText,
 } from '@mui/material';
+import Person4Icon from '@mui/icons-material/Person4';
 import { NAV } from 'src/config-global';
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
@@ -56,7 +57,7 @@ export default function NavMobile() {
   return (
     <>
       <IconButton onClick={handleOpen} sx={{ ml: 1, color: 'inherit' }}>
-        <Iconify icon="carbon:menu" />
+        <Person4Icon fontSize="inherit" style={{ color: 'rgb(30, 136, 229)' }} />
       </IconButton>
 
       <Drawer

@@ -15,6 +15,20 @@ export const uploadFile = async (file: File): Promise<AxiosResponse<any>> => {
   }
 };
 
+export const uploadFileAvatar = async (file: File): Promise<AxiosResponse<any>> => {
+  const formData = new FormData();
+  formData.append('ImageUrl', file);
+  console.log(file);
+  try {
+    const response = await requestWebDriver.post('/api/v1/upload', formData);
+    console.log('File uploaded successfully:', response.data);
+    return response;
+  } catch (error) {
+    console.error('Error uploading file:', error);
+    throw error;
+  }
+};
+
 export const patchDriverAvatar = async (
   driverId: string,
   imageUrl: string
@@ -26,7 +40,7 @@ export const patchDriverAvatar = async (
   try {
     const response = await requestWebDriver.patch('/api/v1/driver/change-avatar', body);
     console.log('Avatar updated successfully:', response.data);
-    return response;
+    return response.data;
   } catch (error) {
     console.error('Error updating avatar:', error);
     throw error;

@@ -51,7 +51,7 @@ export default function TripListView() {
         >
           <Typography variant="h2">Danh sách cuốc xe</Typography>
 
-          <Button
+          {/* <Button
             color="inherit"
             variant="contained"
             startIcon={<Iconify icon="carbon:filter" width={18} />}
@@ -61,7 +61,7 @@ export default function TripListView() {
             }}
           >
             Filters
-          </Button>
+          </Button> */}
         </Stack>
 
         <Stack direction={{ xs: 'column', md: 'row' }}>
