@@ -1,16 +1,23 @@
-import { useEffect, useState } from 'react';
-import { Box, Typography, Stack, TextField, Button } from '@mui/material';
-import { useDriverInfo } from 'src/hooks/useDriverInfo';
-import { getDriverInfo } from 'src/api/Driver/Driver';
-import EcommerceAccountLayout from '../../account/layouts/AccountLayout';
-import DriverLicenseCard from '../../components/navbar/DriverLicenseCard';
-import { changeDriverPassword } from 'src/api/Auth/Auth';
-import { Snackbar, Alert } from '@mui/material';
-import { AlertColor } from '@mui/material/Alert';
-import IconButton from '@mui/material/IconButton';
-import InputAdornment from '@mui/material/InputAdornment';
+import {
+  Box,
+  Typography,
+  Stack,
+  TextField,
+  Button,
+  Snackbar,
+  Alert,
+  IconButton,
+  InputAdornment,
+  AlertColor,
+} from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
+import { useDriverInfo } from 'src/hooks/useDriverInfo';
+import { getDriverInfo } from 'src/api/Driver/Driver';
+import { changeDriverPassword } from 'src/api/Auth/Auth';
+import EcommerceAccountLayout from '../../account/layouts/AccountLayout';
+import DriverLicenseCard from '../../components/navbar/DriverLicenseCard';
+import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -60,9 +67,9 @@ export default function DriverProfile() {
     }
   }, [driverId]);
 
-  const isValidPassword = (password: string): boolean => {
+  const isValidPassword = (newPassword: string): boolean => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return regex.test(password);
+    return regex.test(newPassword);
   };
 
   const handleChangePassword = async () => {
@@ -217,52 +224,6 @@ export default function DriverProfile() {
           </>
         )}
         <DriverLicenseCard degreeId={driverId} />
-        {/* <Stack spacing={2.5}>
-              <RHFTextField
-                name="oldPassword"
-                label="Old Password"
-                type={showPassword ? 'text' : 'password'}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={handleShowPassword} edge="end">
-                        <Iconify icon={showPassword ? 'carbon:view' : 'carbon:view-off'} />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-    
-              <RHFTextField
-                name="newPassword"
-                label="New Password"
-                type={showPassword ? 'text' : 'password'}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={handleShowPassword} edge="end">
-                        <Iconify icon={showPassword ? 'carbon:view' : 'carbon:view-off'} />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-    
-              <RHFTextField
-                name="confirmNewPassword"
-                label="Confirm New Password"
-                type={showPassword ? 'text' : 'password'}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">
-                      <IconButton onClick={handleShowPassword} edge="end">
-                        <Iconify icon={showPassword ? 'carbon:view' : 'carbon:view-off'} />
-                      </IconButton>
-                    </InputAdornment>
-                  ),
-                }}
-              />
-            </Stack> */}
       </Stack>
       <Snackbar open={snackbarOpen} autoHideDuration={6000} onClose={() => setSnackbarOpen(false)}>
         <Alert
