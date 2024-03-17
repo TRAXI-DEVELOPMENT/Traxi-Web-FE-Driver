@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   Box,
   Typography,
@@ -17,7 +18,6 @@ import { getDriverInfo } from 'src/api/Driver/Driver';
 import { changeDriverPassword } from 'src/api/Auth/Auth';
 import EcommerceAccountLayout from '../../account/layouts/AccountLayout';
 import DriverLicenseCard from '../../components/navbar/DriverLicenseCard';
-import { useEffect, useState } from 'react';
 
 // ----------------------------------------------------------------------
 
@@ -67,9 +67,9 @@ export default function DriverProfile() {
     }
   }, [driverId]);
 
-  const isValidPassword = (newPassword: string): boolean => {
+  const isValidPassword = (passwordToValidate: string): boolean => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    return regex.test(newPassword);
+    return regex.test(passwordToValidate);
   };
 
   const handleChangePassword = async () => {
