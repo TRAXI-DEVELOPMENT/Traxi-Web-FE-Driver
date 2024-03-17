@@ -11,6 +11,7 @@ import {
   ListItemIcon,
   ListItemText,
   ListItemButton,
+  Button,
 } from '@mui/material';
 // hooks
 import useResponsive from 'src/hooks/useResponsive';
@@ -26,6 +27,8 @@ import useAuth from 'src/hooks/useAuth';
 import { useDriverInfo } from 'src/hooks/useDriverInfo';
 import { useEffect, useState } from 'react';
 import { getDriverInfo } from 'src/api/Driver/Driver';
+import { patchDriverAvatar, uploadFile } from 'src/api/Upload/uploadFile';
+import { styled } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
@@ -58,11 +61,16 @@ export default function AccountMenu({ open, onClose }: Props) {
   const isMdUp = useResponsive('up', 'md');
   const { logout } = useAuth();
   const driverId = useDriverInfo();
+  const [avatarUrl, setAvatarUrl] = useState('');
 
   const [driverData, setDriverData] = useState({
     fullName: '',
     phone: '',
     imageUrl: '',
+  });
+
+  const HiddenInput = styled('input')({
+    display: 'none',
   });
 
   useEffect(() => {
@@ -85,6 +93,27 @@ export default function AccountMenu({ open, onClose }: Props) {
     }
   }, [driverId]);
 
+  const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files ? event.target.files[0] : null;
+    if (!file) return;
+
+    try {
+      const uploadResponse = await uploadFile(file);
+      const imageUrl = uploadResponse.data.link_img;
+      if (imageUrl) {
+        const patchResponse = await patchDriverAvatar(driverId, imageUrl);
+        if (patchResponse.status === 200) {
+          setDriverData((prevState) => ({
+            ...prevState,
+            imageUrl: imageUrl,
+          }));
+        }
+      }
+    } catch (error) {
+      console.error('Error handling file change:', error);
+    }
+  };
+
   const renderContent = (
     <Stack
       sx={{
@@ -99,7 +128,22 @@ export default function AccountMenu({ open, onClose }: Props) {
     >
       <Stack spacing={2} sx={{ p: 3, pb: 2 }}>
         <Stack spacing={2} direction="row" alignItems="center">
-          <Avatar src={driverData.imageUrl} sx={{ width: 64, height: 64 }} />
+          <Avatar src={driverData.imageUrl} sx={{ width: 64, height: 64, mt: 2 }} />
+          <HiddenInput
+            accept="image/*"
+            type="file"
+            onChange={handleFileChange}
+            id="avatar-upload"
+          />
+          <label htmlFor="avatar-upload">
+            <Stack
+              direction="row"
+              alignItems="center"
+              sx={{ typography: 'caption', cursor: 'pointer', '&:hover': { opacity: 0.72 } }}
+            >
+              <Iconify icon="carbon:edit" sx={{ mr: 1 }} />
+            </Stack>
+          </label>
           <Stack spacing={0.5}>
             <TextMaxLine variant="subtitle1" line={1}>
               {driverData.fullName}

@@ -14,3 +14,21 @@ export const uploadFile = async (file: File): Promise<AxiosResponse<any>> => {
     throw error;
   }
 };
+
+export const patchDriverAvatar = async (
+  driverId: string,
+  imageUrl: string
+): Promise<AxiosResponse<any>> => {
+  const body = {
+    DriverId: driverId,
+    ImageUrl: imageUrl,
+  };
+  try {
+    const response = await requestWebDriver.patch('/api/v1/driver/change-avatar', body);
+    console.log('Avatar updated successfully:', response.data);
+    return response;
+  } catch (error) {
+    console.error('Error updating avatar:', error);
+    throw error;
+  }
+};
