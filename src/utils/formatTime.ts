@@ -44,6 +44,11 @@ export function formatDate(dateString: string): string {
   return formattedDate;
 }
 
+export function formatDateDegree(dateString: string): string {
+  const parts = dateString.split('/');
+  return `${parts[2]}-${parts[1]}-${parts[0]}`;
+}
+
 export function fCustomFormatDate(date: InputValue) {
   if (!date) return '';
   const parsedDate = parse(date.toString(), 'MMM dd yyyy hh:mma', new Date());

@@ -14,7 +14,7 @@ export const applyForJob = async ({
       Address,
       Password,
     });
-    return response.data;
+    return response.data.result;
   } catch (error) {
     console.error('Error applying for job:', error);
     throw error;

@@ -1,11 +1,14 @@
-import React, { useState } from 'react';
-import { uploadFile } from 'src/api/Upload/uploadFile'; // Đảm bảo đường dẫn đúng
+import React, { useState, useRef } from 'react';
+import { uploadFile } from 'src/api/Upload/uploadFile';
+import { Button } from '@mui/material';
 
 const FileUploadPage: React.FC = () => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [uploading, setUploading] = useState<boolean>(false);
   const [message, setMessage] = useState<string>('');
-  const [response, setResponse] = useState<any>(null);
+  const [response, setResponse] = useState<any>(null); // Quản lý trạng thái response trực tiếp
+
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const handleUpload = async (file: File) => {
     setUploading(true);
@@ -13,6 +16,7 @@ const FileUploadPage: React.FC = () => {
       const responseFromAPI = await uploadFile(file);
       setResponse(responseFromAPI);
       setMessage('File đã được tải lên thành công!');
+      localStorage.setItem('fileUploadResponse', JSON.stringify(responseFromAPI));
       console.log('Phản hồi từ API:', responseFromAPI);
     } catch (error) {
       console.error('Lỗi khi tải file:', error);
@@ -22,18 +26,32 @@ const FileUploadPage: React.FC = () => {
     }
   };
 
+  const handleButtonClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     if (event.target.files && event.target.files[0]) {
       const file = event.target.files[0];
       setSelectedFile(file);
-      handleUpload(file); // Tự động tải file lên sau khi file được chọn
+      handleUpload(file);
     }
   };
 
   return (
     <div>
-      <input type="file" onChange={handleFileChange} disabled={uploading} />
-      {message && <p>{message}</p>}
+      <input
+        type="file"
+        style={{ display: 'none' }}
+        onChange={handleFileChange}
+        disabled={uploading}
+        ref={fileInputRef}
+      />
+      <Button variant="contained" component="span" onClick={handleButtonClick} disabled={uploading}>
+        {uploading ? 'Đang tải lên...' : 'Tải lên'}
+      </Button>
     </div>
   );
 };

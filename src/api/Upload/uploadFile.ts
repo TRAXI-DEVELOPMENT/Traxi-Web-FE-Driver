@@ -8,7 +8,7 @@ export const uploadFile = async (file: File): Promise<AxiosResponse<any>> => {
   try {
     const response = await requestWebDriver.post('/api/v1/upload', formData);
     console.log('File uploaded successfully:', response.data);
-    return response;
+    return response.data;
   } catch (error) {
     console.error('Error uploading file:', error);
     throw error;

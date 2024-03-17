@@ -9,8 +9,8 @@ import useResponsive from 'src/hooks/useResponsive';
 // components
 import Image from 'src/components/image';
 //
-import PaymentForm from 'src/pages/checkout/PaymentForm';
-import Checkout from 'src/pages/checkout/Checkout';
+import PaymentForm from 'src/pages/applyjob/DegreeForm';
+import Checkout from 'src/pages/applyjob/Checkout';
 import AuthRegisterForm from '../components/AuthRegisterForm'; // Đã di chuyển xuống đây
 
 // ----------------------------------------------------------------------

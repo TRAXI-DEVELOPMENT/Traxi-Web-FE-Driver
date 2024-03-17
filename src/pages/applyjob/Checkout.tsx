@@ -1,37 +1,30 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import NextLink from 'next/link';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import CssBaseline from '@mui/material/CssBaseline';
 import Grid from '@mui/material/Grid';
 import Stack from '@mui/material/Stack';
 import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Stepper from '@mui/material/Stepper';
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Typography from '@mui/material/Typography';
 import Iconify from 'src/components/iconify';
-
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 import { PaletteMode } from '@mui/material';
-
-import ArrowBackRoundedIcon from '@mui/icons-material/ArrowBackRounded';
-import AutoAwesomeRoundedIcon from '@mui/icons-material/AutoAwesomeRounded';
 import ChevronLeftRoundedIcon from '@mui/icons-material/ChevronLeftRounded';
 import ChevronRightRoundedIcon from '@mui/icons-material/ChevronRightRounded';
 
 // Đặt các import từ contexts và api trước các import của component
-import { CheckoutProvider, useCheckout } from 'src/contexts/CheckoutContext';
+import { useCheckout } from 'src/contexts/CheckoutContext';
 import { applyForJob, postDriverDegree } from 'src/api/Driver/ApplyJob';
 
 import { paths } from 'src/routes/paths';
 
 // Sau đó là các import của component
-import AddressForm from './AddressForm';
-import PaymentForm from './PaymentForm';
+import { formatDateDegree } from 'src/utils/formatTime';
+import DriverForm from './DriverForm';
+import DegreeForm from './DegreeForm';
 import Review from './Review';
 import ToggleColorMode from './ToggleColorMode';
 
@@ -47,9 +40,9 @@ const logoStyle = {
 function getStepContent(step: number) {
   switch (step) {
     case 0:
-      return <AddressForm />;
+      return <DriverForm />;
     case 1:
-      return <PaymentForm />;
+      return <DegreeForm />;
     case 2:
       return <Review />;
     default:
@@ -187,6 +180,7 @@ export default function Checkout() {
                 <Typography variant="h1">
                   <Iconify icon="clarity:license-outline-alerted" />
                 </Typography>
+                <ApplyJob />
                 <Typography variant="h5">Hồ sơ của bạn đã được gửi đi</Typography>
                 <Typography variant="body1" color="text.secondary">
                   Hãy chờ phản hồi của TraXi thời gian làm việc tối đa 72 giờ <br />
@@ -263,4 +257,54 @@ export default function Checkout() {
       </Grid>
     </>
   );
+}
+
+function ApplyJob() {
+  const { checkoutData } = useCheckout();
+  const [imageUrl, setImageUrl] = useState<string>('');
+
+  useEffect(() => {
+    const responseFromAPI = localStorage.getItem('fileUploadResponse');
+    if (responseFromAPI) {
+      const responseData = JSON.parse(responseFromAPI);
+      setImageUrl(responseData.link_img);
+    }
+  }, []);
+
+  useEffect(() => {
+    const applyJob = async () => {
+      if (!imageUrl) return;
+
+      try {
+        const responseFromAPI = localStorage.getItem('fileUploadResponse');
+        if (responseFromAPI) {
+          const responseData = JSON.parse(responseFromAPI);
+          setImageUrl(responseData.link_img);
+        }
+
+        const applyResponse = await applyForJob({
+          Fullname: checkoutData.Fullname,
+          Phone: checkoutData.Phone,
+          Address: checkoutData.Address,
+          Password: checkoutData.Password,
+        });
+        const date = formatDateDegree(checkoutData.expirationDate || '');
+        const degreeResponse = await postDriverDegree({
+          DriverId: applyResponse.DriverId,
+          DateDegree: date ?? 'Giá trị mặc định',
+          DegreeName: 'Giấy phép lái xe',
+          Type: checkoutData.licenseType ?? 'A1',
+          ImageUrl: imageUrl,
+        });
+        // localStorage.removeItem('fileUploadResponse');
+        console.log('Application response:', applyResponse, degreeResponse);
+      } catch (error) {
+        console.error('Error applying for job:', error);
+      }
+    };
+
+    applyJob();
+  }, [imageUrl, checkoutData]);
+
+  return <></>;
 }

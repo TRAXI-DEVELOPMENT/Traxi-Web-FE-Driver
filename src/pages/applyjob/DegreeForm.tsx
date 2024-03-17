@@ -30,7 +30,7 @@ interface CheckoutData {
   licenseType?: string;
 }
 
-export default function PaymentForm() {
+export default function DegreeForm() {
   const [expirationDate, setExpirationDate] = React.useState('');
   const { checkoutData, setCheckoutData } = useCheckout(); // Sử dụng setCheckoutData từ context
 
@@ -90,20 +90,6 @@ export default function PaymentForm() {
           </Box>
           <FileUploadPage />
           <Box sx={{ display: 'flex', gap: 2 }}>
-            <FormGrid sx={{ flexGrow: 1 }}>
-              <FormLabel htmlFor="card-expiration" required>
-                Ngày cấp
-              </FormLabel>
-              <OutlinedInput
-                id="card-expiration"
-                name="expirationDate"
-                autoComplete="card-expiration"
-                placeholder="DD/MM/YYYY"
-                required
-                value={expirationDate}
-                onChange={handleExpirationDateChange}
-              />
-            </FormGrid>
             <Box
               sx={{
                 display: 'flex',
@@ -113,6 +99,20 @@ export default function PaymentForm() {
                 minWidth: 120,
               }}
             >
+              <FormGrid sx={{ flexGrow: 1 }}>
+                <FormLabel htmlFor="card-expiration" required>
+                  Ngày cấp
+                </FormLabel>
+                <OutlinedInput
+                  id="card-expiration"
+                  name="expirationDate"
+                  autoComplete="card-expiration"
+                  placeholder="DD/MM/YYYY"
+                  required
+                  value={expirationDate}
+                  onChange={handleExpirationDateChange}
+                />
+              </FormGrid>
               <FormControl fullWidth>
                 <InputLabel variant="standard" htmlFor="uncontrolled-native">
                   Loại bằng lái

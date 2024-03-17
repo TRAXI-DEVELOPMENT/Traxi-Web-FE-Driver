@@ -13,7 +13,7 @@ const FormGrid = styled(Grid)(() => ({
   flexDirection: 'column',
 }));
 
-export default function AddressForm() {
+export default function DriverForm() {
   const { checkoutData, setCheckoutData } = useCheckout();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
