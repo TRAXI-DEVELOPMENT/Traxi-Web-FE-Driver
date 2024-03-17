@@ -11,6 +11,7 @@ import {
   ListItemIcon,
   ListItemText,
   ListItemButton,
+  Button,
 } from '@mui/material';
 // hooks
 import useResponsive from 'src/hooks/useResponsive';
@@ -76,7 +77,6 @@ export default function AccountMenu({ open, onClose }: Props) {
         .then((data) => {
           const { result } = data;
           if (result) {
-            // Cập nhật state với toàn bộ dữ liệu driver
             setDriverData({
               fullName: result.FullName,
               phone: result.Phone,
@@ -133,13 +133,10 @@ export default function AccountMenu({ open, onClose }: Props) {
             id="avatar-upload"
           />
           <label htmlFor="avatar-upload">
-            <Stack
-              direction="row"
-              alignItems="center"
-              sx={{ typography: 'caption', cursor: 'pointer', '&:hover': { opacity: 0.72 } }}
-            >
+            <Button component="span" sx={{ typography: 'caption', cursor: 'pointer', '&:hover': { opacity: 0.72 } }}>
               <Iconify icon="carbon:edit" sx={{ mr: 1 }} />
-            </Stack>
+              Đổi Avatar
+            </Button>
           </label>
           <Stack spacing={0.5}>
             <TextMaxLine variant="subtitle1" line={1}>
