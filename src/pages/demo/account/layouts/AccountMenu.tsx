@@ -1,7 +1,7 @@
 // next
 import NextLink from 'next/link';
 // @mui
-import { alpha } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 import {
   Link,
   Stack,
@@ -11,7 +11,6 @@ import {
   ListItemIcon,
   ListItemText,
   ListItemButton,
-  Button,
 } from '@mui/material';
 // hooks
 import useResponsive from 'src/hooks/useResponsive';
@@ -28,7 +27,6 @@ import { useDriverInfo } from 'src/hooks/useDriverInfo';
 import { useEffect, useState } from 'react';
 import { getDriverInfo } from 'src/api/Driver/Driver';
 import { patchDriverAvatar, uploadFile } from 'src/api/Upload/uploadFile';
-import { styled } from '@mui/material/styles';
 
 // ----------------------------------------------------------------------
 
@@ -61,7 +59,6 @@ export default function AccountMenu({ open, onClose }: Props) {
   const isMdUp = useResponsive('up', 'md');
   const { logout } = useAuth();
   const driverId = useDriverInfo();
-  const [avatarUrl, setAvatarUrl] = useState('');
 
   const [driverData, setDriverData] = useState({
     fullName: '',
