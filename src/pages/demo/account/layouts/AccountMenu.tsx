@@ -125,12 +125,11 @@ export default function AccountMenu({ open, onClose }: Props) {
       <Stack spacing={2} sx={{ p: 3, pb: 2 }} direction="row" alignItems="center">
         <Avatar src={driverData.imageUrl} sx={{ width: 64, height: 64, mt: 2 }} />
         <label>
-          <input
+          <HiddenInput
             accept="image/*"
             type="file"
             onChange={handleFileChange}
             id="avatar-upload"
-            style={{ display: 'none' }}
           />
           <Stack
             component="span"
