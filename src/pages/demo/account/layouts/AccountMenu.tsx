@@ -102,7 +102,7 @@ export default function AccountMenu({ open, onClose }: Props) {
         if (patchResponse.status === 200) {
           setDriverData((prevState) => ({
             ...prevState,
-            imageUrl: imageUrl,
+            imageUrl,
           }));
         }
       }
@@ -133,9 +133,11 @@ export default function AccountMenu({ open, onClose }: Props) {
             id="avatar-upload"
           />
           <label htmlFor="avatar-upload">
-            <Button component="span" sx={{ typography: 'caption', cursor: 'pointer', '&:hover': { opacity: 0.72 } }}>
+            <Button
+              component="span"
+              sx={{ typography: 'caption', cursor: 'pointer', '&:hover': { opacity: 0.72 } }}
+            >
               <Iconify icon="carbon:edit" sx={{ mr: 1 }} />
-              Đổi Avatar
             </Button>
           </label>
           <Stack spacing={0.5}>
