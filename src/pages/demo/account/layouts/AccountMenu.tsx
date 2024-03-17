@@ -11,7 +11,6 @@ import {
   ListItemIcon,
   ListItemText,
   ListItemButton,
-  Button,
 } from '@mui/material';
 // hooks
 import useResponsive from 'src/hooks/useResponsive';
@@ -123,34 +122,31 @@ export default function AccountMenu({ open, onClose }: Props) {
         }),
       }}
     >
-      <Stack spacing={2} sx={{ p: 3, pb: 2 }}>
-        <Stack spacing={2} direction="row" alignItems="center">
-          <Avatar src={driverData.imageUrl} sx={{ width: 64, height: 64, mt: 2 }} />
+      <Stack spacing={2} sx={{ p: 3, pb: 2 }} direction="row" alignItems="center">
+        <Avatar src={driverData.imageUrl} sx={{ width: 64, height: 64, mt: 2 }} />
+        <label>
           <HiddenInput
             accept="image/*"
             type="file"
             onChange={handleFileChange}
             id="avatar-upload"
           />
-          <label htmlFor="avatar-upload">
-            <Button
-              component="span"
-              sx={{ typography: 'caption', cursor: 'pointer', '&:hover': { opacity: 0.72 } }}
-            >
-              <Iconify icon="carbon:edit" sx={{ mr: 1 }} />
-            </Button>
-          </label>
-          <Stack spacing={0.5}>
-            <TextMaxLine variant="subtitle1" line={1}>
-              {driverData.fullName}
-            </TextMaxLine>
-            <TextMaxLine variant="body2" line={1} sx={{ color: 'text.secondary' }}>
-              {driverData.phone}
-            </TextMaxLine>
+          <Stack
+            component="span"
+            sx={{ typography: 'caption', cursor: 'pointer', '&:hover': { opacity: 0.72 } }}
+          >
+            <Iconify icon="carbon:edit" sx={{ mr: 1 }} />
           </Stack>
+        </label>
+        <Stack spacing={0.5}>
+          <TextMaxLine variant="subtitle1" line={1}>
+            {driverData.fullName}
+          </TextMaxLine>
+          <TextMaxLine variant="body2" line={1} sx={{ color: 'text.secondary' }}>
+            {driverData.phone}
+          </TextMaxLine>
         </Stack>
       </Stack>
-
       <Divider sx={{ borderStyle: 'dashed' }} />
 
       <Stack sx={{ my: 1, px: 2 }}>
