@@ -1,51 +1,42 @@
-import { useState, useEffect } from 'react';
-// next
-import NextLink from 'next/link';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter } from 'next/router';
-// @mui
+import NextLink from 'next/link';
 import {
   Link,
   Drawer,
   IconButton,
-  Button,
   ListItemIcon,
   Stack,
   ListItemButton,
   ListItemText,
 } from '@mui/material';
-// config
 import { NAV } from 'src/config-global';
-// components
 import Logo from 'src/components/logo';
 import Iconify from 'src/components/iconify';
 import Scrollbar from 'src/components/scrollbar';
-//
-import { NavProps } from '../types';
-import NavList from './NavList';
-import { paths } from 'src/routes/paths';
 import useAuth from 'src/hooks/useAuth';
 import useActiveLink from 'src/hooks/useActiveLink';
+import { paths } from 'src/routes/paths';
 
 export default function NavMobile() {
   const { pathname } = useRouter();
   const { logout } = useAuth();
   const router = useRouter();
-
   const [open, setOpen] = useState(false);
+
+  const handleClose = useCallback(() => {
+    setOpen(false);
+    router.push(paths.demoaccount);
+  }, [router]);
 
   useEffect(() => {
     if (open) {
       handleClose();
     }
-  }, [pathname]);
+  }, [pathname, open, handleClose]);
 
   const handleOpen = () => {
     setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-    router.push(paths.demoaccount);
   };
 
   const navigations = [
