@@ -1,7 +1,7 @@
 // next
 import NextLink from 'next/link';
 // @mui
-import { alpha } from '@mui/material/styles';
+import { alpha, styled } from '@mui/material/styles';
 import {
   Link,
   Stack,
@@ -11,7 +11,6 @@ import {
   ListItemIcon,
   ListItemText,
   ListItemButton,
-  Button,
 } from '@mui/material';
 // hooks
 import useResponsive from 'src/hooks/useResponsive';
@@ -26,9 +25,8 @@ import TextMaxLine from 'src/components/text-max-line';
 import useAuth from 'src/hooks/useAuth';
 import { useDriverInfo } from 'src/hooks/useDriverInfo';
 import { useEffect, useState } from 'react';
-import { getDriverInfo } from 'src/api/Driver/Driver';
-import { patchDriverAvatar, uploadFile, uploadFileAvatar } from 'src/api/Upload/uploadFile';
-import { styled } from '@mui/material/styles';
+import { getDriverInfo } from 'src/api/Driver/Driver'; // Gộp các import từ src/api
+import { patchDriverAvatar, uploadFileAvatar } from 'src/api/Upload/uploadFile';
 
 // ----------------------------------------------------------------------
 
@@ -61,8 +59,6 @@ export default function AccountMenu({ open, onClose }: Props) {
   const isMdUp = useResponsive('up', 'md');
   const { logout } = useAuth();
   const driverId = useDriverInfo();
-  const [avatarUrl, setAvatarUrl] = useState('');
-
   const [driverData, setDriverData] = useState({
     fullName: '',
     phone: '',
@@ -101,10 +97,10 @@ export default function AccountMenu({ open, onClose }: Props) {
       const uploadResponse = await uploadFileAvatar(file);
       const imageUrl = uploadResponse.data.link_img;
       if (imageUrl) {
-        const patchResponse = await patchDriverAvatar(driverId, imageUrl);
+        await patchDriverAvatar(driverId, imageUrl);
         setDriverData((prevState) => ({
           ...prevState,
-          imageUrl: imageUrl,
+          imageUrl,
         }));
         console.log('New Image URL:', imageUrl);
       }
@@ -132,12 +128,6 @@ export default function AccountMenu({ open, onClose }: Props) {
             sx={{ width: 64, height: 64, mt: 2 }}
             key={driverData.imageUrl}
           />
-          <HiddenInput
-            accept="image/*"
-            type="file"
-            onChange={handleFileChange}
-            id="avatar-upload"
-          />
           <label htmlFor="avatar-upload">
             <Stack
               direction="row"
@@ -145,6 +135,13 @@ export default function AccountMenu({ open, onClose }: Props) {
               sx={{ typography: 'caption', cursor: 'pointer', '&:hover': { opacity: 0.72 } }}
             >
               <Iconify icon="carbon:edit" sx={{ mr: 1 }} />
+              <input
+                accept="image/*"
+                type="file"
+                onChange={handleFileChange}
+                id="avatar-upload"
+                style={{ display: 'none' }}
+              />
             </Stack>
           </label>
           <Stack spacing={0.5}>
