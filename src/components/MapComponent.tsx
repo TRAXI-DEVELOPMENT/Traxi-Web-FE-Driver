@@ -48,7 +48,7 @@ export default function MapComponent({ tripId }: MapComponentProps) {
     null
   );
 
-  const customerId = tripDetails?.CustomerId;
+  // const customerId = tripDetails?.CustomerId;
 
   useEffect(() => {
     const fetchTripDetails = async () => {
@@ -72,11 +72,11 @@ export default function MapComponent({ tripId }: MapComponentProps) {
   const mapRef = createRef<GoogleMap>();
 
   useEffect(() => {
-    if (!isLoaded || !customerId) return;
+    if (!isLoaded || !tripId) return;
 
     const fetchPositionAndCalculateRoute = async () => {
       try {
-        const { result } = await getPositionById(customerId);
+        const { result } = await getPositionById(tripId);
         if (result) {
           const originLatLng = result.originLatLng.split(', ').map((coord: string) => {
             const [_, value] = coord.split(': ');
@@ -112,7 +112,7 @@ export default function MapComponent({ tripId }: MapComponentProps) {
     };
 
     fetchPositionAndCalculateRoute();
-  }, [isLoaded, customerId]);
+  }, [isLoaded, tripId]);
 
   if (loadError) return <div>Lỗi khi tải bản đồ</div>;
   if (!isLoaded) return <div>Đang tải bản đồ...</div>;
