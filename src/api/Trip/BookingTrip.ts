@@ -13,3 +13,4 @@ export const BookingTrip = async ({ driverId, tripId }: BookingTripProps): Promi
     throw error;
   }
 };
+

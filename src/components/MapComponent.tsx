@@ -2,9 +2,10 @@
 import { useRouter } from 'next/router';
 import { createRef, useEffect, useState } from 'react';
 // api
-import { getDetailTrip } from 'src/api/Trip/Trip';
+import { getDetailTrip } from 'src/api/Trip/Trip'; // Assuming getPositionById is added here
 // layouts
 import { GoogleMap, useLoadScript, DirectionsRenderer } from '@react-google-maps/api';
+import { getPositionById } from 'src/api/GoogleMap/Map';
 
 const mapContainerStyle = {
   width: '800px',
@@ -36,7 +37,7 @@ interface TripDetails {
     StartLocation: string;
     EndLocation: string;
     TripId: string;
-    Vehicle: null | string; // Giả sử Vehicle có thể là null hoặc string, điều chỉnh tùy theo dữ liệu thực tế
+    Vehicle: null | string;
   };
 }
 
@@ -46,6 +47,8 @@ export default function MapComponent({ tripId }: MapComponentProps) {
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(
     null
   );
+
+  const customerId = tripDetails?.CustomerId;
 
   useEffect(() => {
     const fetchTripDetails = async () => {
@@ -69,31 +72,48 @@ export default function MapComponent({ tripId }: MapComponentProps) {
   const mapRef = createRef<GoogleMap>();
 
   useEffect(() => {
-    if (!isLoaded || !tripDetails || !tripDetails.TripDetail) return;
+    if (!isLoaded || !customerId) return;
 
-    const directionsService = new google.maps.DirectionsService();
-    const origin = tripDetails?.TripDetail.StartLocation;
-    const destination = tripDetails?.TripDetail.EndLocation;
+    const fetchPositionAndCalculateRoute = async () => {
+      try {
+        const { result } = await getPositionById(customerId);
+        console.log('result', result);
+        if (result) {
+          const originLatLng = result.originLatLng.split(', ').map((coord: string) => {
+            const [_, value] = coord.split(': ');
+            return parseFloat(value);
+          });
+          const destinationLatLng = result.destinationLatLng.split(', ').map((coord: string) => {
+            const [_, value] = coord.split(': ');
+            return parseFloat(value);
+          });
 
-    const calculateRoute = async () => {
-      directionsService.route(
-        {
-          origin,
-          destination,
-          travelMode: google.maps.TravelMode.DRIVING,
-        },
-        (result, status) => {
-          if (status === google.maps.DirectionsStatus.OK && result) {
-            setDirectionsResponse(result);
-          } else {
-            console.error(`error fetching directions ${result}`);
-          }
+          const origin = { lat: originLatLng[0], lng: originLatLng[1] };
+          const destination = { lat: destinationLatLng[0], lng: destinationLatLng[1] };
+
+          const directionsService = new google.maps.DirectionsService();
+          directionsService.route(
+            {
+              origin,
+              destination,
+              travelMode: google.maps.TravelMode.DRIVING,
+            },
+            (result, status) => {
+              if (status === google.maps.DirectionsStatus.OK && result) {
+                setDirectionsResponse(result);
+              } else {
+                console.error(`error fetching directions ${result}`);
+              }
+            }
+          );
         }
-      );
+      } catch (error) {
+        console.error('Failed to fetch position data:', error);
+      }
     };
 
-    calculateRoute();
-  }, [isLoaded, tripDetails]);
+    fetchPositionAndCalculateRoute();
+  }, [isLoaded, tripId]);
 
   if (loadError) return <div>Lỗi khi tải bản đồ</div>;
   if (!isLoaded) return <div>Đang tải bản đồ...</div>;
