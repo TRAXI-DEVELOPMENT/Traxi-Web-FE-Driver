@@ -42,19 +42,19 @@ export default function AccountView() {
       if (!userId) return;
 
       try {
-        const data = await getDetailTripByDriver(userId); 
+        const data = await getDetailTripByDriver(userId);
         data.sort(
           (a: TripsDriver, b: TripsDriver) =>
-            new Date(b.BookingDate).getTime() - new Date(a.BookingDate).getTime() 
+            new Date(b.BookingDate).getTime() - new Date(a.BookingDate).getTime()
         );
         setTripsDriver(data);
 
-        const trips = await getDetailTripByDriver(userId);
-        let total = 0;
-        for (const trip of trips) {
-          const detail = await getDetailTrip(trip.Id); 
-          total += detail.TripDetail.TotalPrice;
-        }
+        // Sử dụng Promise.all để thực hiện các yêu cầu bất đồng bộ song song
+        const tripDetailsPromises = data.map((trip) => getDetailTrip(trip.Id));
+        const tripDetails = await Promise.all(tripDetailsPromises);
+
+        // Tính toán tổng thu nhập
+        const total = tripDetails.reduce((acc, detail) => acc + detail.TripDetail.TotalPrice, 0);
         setTotalEarnings(total * 0.7);
       } catch (error) {
         console.error('Failed to fetch trip details:', error);
