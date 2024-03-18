@@ -49,11 +49,9 @@ export default function AccountView() {
         );
         setTripsDriver(data);
 
-        // Sử dụng Promise.all để thực hiện các yêu cầu bất đồng bộ song song
-        const tripDetailsPromises = data.map((trip) => getDetailTrip(trip.Id));
+        const tripDetailsPromises = data.map((trip: TripsDriver) => getDetailTrip(trip.Id));
         const tripDetails = await Promise.all(tripDetailsPromises);
 
-        // Tính toán tổng thu nhập
         const total = tripDetails.reduce((acc, detail) => acc + detail.TripDetail.TotalPrice, 0);
         setTotalEarnings(total * 0.7);
       } catch (error) {
