@@ -32,6 +32,7 @@ export const getActiveTrips = async (): Promise<Trip[]> => {
 export const getDetailTrip = async (tripId: string) => {
   try {
     const response = await requestWebDriver.get(`/api/v1/trip-no-driver/${tripId}`);
+    console.log(response.data.result);
     return response.data.result;
   } catch (error) {
     console.error('Error when calling getDetailTrip:', error);
@@ -57,6 +58,7 @@ export const getDetailVehiclesByTrip = async (tripId: string) => {
 export const getDetailTripByDriver = async (driverId: string) => {
   try {
     const response = await requestWebDriver.get(`/api/v1/trip-driver/${driverId}`);
+
     return response.data.result;
   } catch (error) {
     console.error('Error when calling getDetailTrip:', error);

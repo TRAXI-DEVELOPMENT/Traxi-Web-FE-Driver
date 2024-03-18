@@ -14,7 +14,7 @@ import {
 // types
 import { TripsDriver } from 'src/types/trips';
 // api
-import { getDetailTripByDriver } from 'src/api/Trip/Trip';
+import { getDetailTrip, getDetailTripByDriver } from 'src/api/Trip/Trip';
 // components
 import AccountItem from '../../account/layouts/AccountItem';
 import AccountLayout from '../../account/layouts/AccountLayout';
@@ -22,6 +22,7 @@ import AccountLayout from '../../account/layouts/AccountLayout';
 export default function AccountView() {
   const [tripsDriver, setTripsDriver] = useState<TripsDriver[] | null>(null);
   const [userId, setUserId] = useState('');
+  const [totalEarnings, setTotalEarnings] = useState(0);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -41,12 +42,20 @@ export default function AccountView() {
       if (!userId) return;
 
       try {
-        const data = await getDetailTripByDriver(userId); // Sửa 'let' thành 'const'
+        const data = await getDetailTripByDriver(userId); 
         data.sort(
           (a: TripsDriver, b: TripsDriver) =>
-            new Date(b.BookingDate).getTime() - new Date(a.BookingDate).getTime() // Sửa cú pháp hàm arrow
+            new Date(b.BookingDate).getTime() - new Date(a.BookingDate).getTime() 
         );
         setTripsDriver(data);
+
+        const trips = await getDetailTripByDriver(userId);
+        let total = 0;
+        for (const trip of trips) {
+          const detail = await getDetailTrip(trip.Id); 
+          total += detail.TripDetail.TotalPrice;
+        }
+        setTotalEarnings(total * 0.7);
       } catch (error) {
         console.error('Failed to fetch trip details:', error);
       }
@@ -59,6 +68,10 @@ export default function AccountView() {
     <AccountLayout>
       <Typography variant="h4" sx={{ mb: 3 }}>
         Lịch sử cuốc
+      </Typography>
+      <Typography variant="h6" sx={{ mb: 3 }}>
+        Tổng thu nhập (70%):{' '}
+        {totalEarnings.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
       </Typography>
       <Box
         gap={3}
