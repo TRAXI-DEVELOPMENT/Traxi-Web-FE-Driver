@@ -77,7 +77,6 @@ export default function MapComponent({ tripId }: MapComponentProps) {
     const fetchPositionAndCalculateRoute = async () => {
       try {
         const { result } = await getPositionById(customerId);
-        console.log('result', result);
         if (result) {
           const originLatLng = result.originLatLng.split(', ').map((coord: string) => {
             const [_, value] = coord.split(': ');
@@ -98,11 +97,11 @@ export default function MapComponent({ tripId }: MapComponentProps) {
               destination,
               travelMode: google.maps.TravelMode.DRIVING,
             },
-            (result, status) => {
-              if (status === google.maps.DirectionsStatus.OK && result) {
-                setDirectionsResponse(result);
+            (directionsResult, status) => {
+              if (status === google.maps.DirectionsStatus.OK && directionsResult) {
+                setDirectionsResponse(directionsResult);
               } else {
-                console.error(`error fetching directions ${result}`);
+                console.error(`error fetching directions ${directionsResult}`);
               }
             }
           );
@@ -113,7 +112,7 @@ export default function MapComponent({ tripId }: MapComponentProps) {
     };
 
     fetchPositionAndCalculateRoute();
-  }, [isLoaded, tripId]);
+  }, [isLoaded, customerId]);
 
   if (loadError) return <div>Lỗi khi tải bản đồ</div>;
   if (!isLoaded) return <div>Đang tải bản đồ...</div>;
