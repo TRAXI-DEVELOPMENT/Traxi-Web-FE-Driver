@@ -53,6 +53,7 @@ export default function AccountView() {
         const tripDetails = await Promise.all(tripDetailsPromises);
 
         const total = tripDetails.reduce((acc, detail) => acc + detail.TripDetail.TotalPrice, 0);
+        console.log('total', total);
         setTotalEarnings(total * 0.7);
       } catch (error) {
         console.error('Failed to fetch trip details:', error);
@@ -68,7 +69,7 @@ export default function AccountView() {
         Lịch sử cuốc
       </Typography>
       <Typography variant="h6" sx={{ mb: 3 }}>
-        Tổng thu nhập (70%):{' '}
+        Tổng thu nhập (70%):
         {totalEarnings.toLocaleString('vi-VN', { style: 'currency', currency: 'VND' })}
       </Typography>
       <Box
@@ -80,9 +81,7 @@ export default function AccountView() {
         }}
       >
         {tripsDriver ? (
-          tripsDriver
-            .sort((a, b) => new Date(b.BookingDate).getTime() - new Date(a.BookingDate).getTime())
-            .map((trip) => <AccountItem key={trip.Id} tripsDriver={trip} />)
+          tripsDriver.map((trip) => <AccountItem key={trip.Id} tripsDriver={trip} />)
         ) : (
           <div>Loading...</div>
         )}

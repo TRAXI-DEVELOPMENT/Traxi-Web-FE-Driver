@@ -202,8 +202,7 @@ export default function TripItem({ trip, vertical }: Props) {
                   wordWrap: 'break-word',
                 }}
               >
-                {truncateString(tripDetails?.StartLocation, 30) ??
-                  'Địa điểm bắt đầu không xác định'}
+                {truncateString(tripDetails?.EndLocation, 30) ?? 'Địa điểm kết thúc không xác định'}
               </Typography>
               <div
                 style={{
@@ -242,7 +241,8 @@ export default function TripItem({ trip, vertical }: Props) {
                   wordWrap: 'break-word',
                 }}
               >
-                {truncateString(tripDetails?.EndLocation, 30) ?? 'Địa điểm kết thúc không xác định'}
+                {truncateString(tripDetails?.StartLocation, 30) ??
+                  'Địa điểm bắt đầu không xác định'}
               </Typography>
               <div style={{ width: 18, height: 28, left: 0, top: 0, position: 'absolute' }}>
                 <div
