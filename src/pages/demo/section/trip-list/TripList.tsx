@@ -17,7 +17,7 @@ export default function TripList({ trips, loading }: Props) {
   return (
     <>
       <Stack spacing={4}>
-        {(loading ? [...Array(9)] : trips ?? []).map((trip, index) =>
+        {(loading ? [...Array(9)] : trips?.sort((a, b) => new Date(b.BookingDate).getTime() - new Date(a.BookingDate).getTime()) ?? []).map((trip, index) =>
           trip ? (
             <TripItem
               key={trip.Id}

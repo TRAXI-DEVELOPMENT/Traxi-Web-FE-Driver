@@ -80,7 +80,9 @@ export default function AccountView() {
         }}
       >
         {tripsDriver ? (
-          tripsDriver.map((trip) => <AccountItem key={trip.Id} tripsDriver={trip} />)
+          tripsDriver
+            .sort((a, b) => new Date(b.BookingDate).getTime() - new Date(a.BookingDate).getTime())
+            .map((trip) => <AccountItem key={trip.Id} tripsDriver={trip} />)
         ) : (
           <div>Loading...</div>
         )}
