@@ -52,7 +52,13 @@ export default function AccountView() {
         const tripDetailsPromises = data.map((trip: TripsDriver) => getDetailTrip(trip.Id));
         const tripDetails = await Promise.all(tripDetailsPromises);
 
-        const total = tripDetails.reduce((acc, detail) => acc + detail.TripDetail.TotalPrice, 0);
+        const total = tripDetails.reduce((acc, detail) => {
+          if (detail && detail.TripDetail && detail.TripDetail.TotalPrice) {
+            return acc + detail.TripDetail.TotalPrice;
+          }
+          return acc;
+        }, 0);
+
         console.log('total', total);
         setTotalEarnings(total * 0.7);
       } catch (error) {
@@ -81,7 +87,9 @@ export default function AccountView() {
         }}
       >
         {tripsDriver ? (
-          tripsDriver.map((trip) => <AccountItem key={trip.Id} tripsDriver={trip} />)
+          tripsDriver
+            .sort((a, b) => new Date(b.BookingDate).getTime() - new Date(a.BookingDate).getTime())
+            .map((trip) => <AccountItem key={trip.Id} tripsDriver={trip} />)
         ) : (
           <div>Loading...</div>
         )}
