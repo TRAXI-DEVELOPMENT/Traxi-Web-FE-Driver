@@ -59,6 +59,7 @@ export default function AccountItem({ tripsDriver }: Props) {
 
   const handleNavigation = () => {
     if (status && tripDetails?.TripId) {
+      console.log('Status', status);
       const path = status === 'Driving' ? paths.demotripdetail : paths.democompletedtrip;
       router.push(`${path}?tripId=${tripDetails.TripId}`);
     }
