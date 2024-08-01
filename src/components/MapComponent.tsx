@@ -4,9 +4,8 @@ import { createRef, useEffect, useState } from 'react';
 // api
 import { getDetailTrip } from 'src/api/Trip/Trip'; // Assuming getPositionById is added here
 // layouts
-import { GoogleMap, useLoadScript, DirectionsRenderer, Libraries } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, DirectionsRenderer } from '@react-google-maps/api';
 import { getPositionById } from 'src/api/GoogleMap/Map';
-import requestWebDriver, { axiosInstances } from 'src/utils/axios';
 
 const mapContainerStyle = {
   width: '800px',
@@ -42,16 +41,14 @@ interface TripDetails {
   };
 }
 
-const libraries: Libraries = ['places']; // Define libraries outside the component
-
 export default function MapComponent({ tripId }: MapComponentProps) {
   const router = useRouter();
   const [tripDetails, setTripDetails] = useState<TripDetails | null>(null);
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(
     null
   );
-  const [apiKey, setApiKey] = useState<string>('');
-  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
+
+  // const customerId = tripDetails?.CustomerId;
 
   useEffect(() => {
     const fetchTripDetails = async () => {
@@ -68,27 +65,8 @@ export default function MapComponent({ tripId }: MapComponentProps) {
     fetchTripDetails();
   }, [tripId]);
 
-  useEffect(() => {
-    const fetchApiKey = async () => {
-      try {
-        const MapsApiKey = await requestWebDriver.get(
-          'https://66940638c6be000fa07df004.mockapi.io/mapapikey'
-        );
-        const fetchedApiKey = MapsApiKey.data[0].mapKey;
-        console.log('Fetched API Key:', fetchedApiKey); // In ra API key để kiểm tra
-        setApiKey(fetchedApiKey);
-        setIsScriptLoaded(true);
-      } catch (error) {
-        console.error('Error fetching API key:', error);
-      }
-    };
-
-    fetchApiKey();
-  }, []);
-
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: apiKey || '', // Đảm bảo API key được truyền vào
-    libraries: isScriptLoaded ? libraries : [], // Sử dụng mảng libraries tĩnh
+    googleMapsApiKey: 'AIzaSyBODXKsXU1Oa25hmMTM-W-w-puMb1f1uhM',
   });
 
   const mapRef = createRef<GoogleMap>();
@@ -136,8 +114,8 @@ export default function MapComponent({ tripId }: MapComponentProps) {
     fetchPositionAndCalculateRoute();
   }, [isLoaded, tripId]);
 
-  if (loadError) return <div>Error loading map</div>;
-  if (!isLoaded) return <div>Loading map...</div>;
+  if (loadError) return <div>Lỗi khi tải bản đồ</div>;
+  if (!isLoaded) return <div>Đang tải bản đồ...</div>;
 
   return (
     <>
