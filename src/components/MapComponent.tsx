@@ -75,7 +75,7 @@ export default function MapComponent({ tripId }: MapComponentProps) {
           'https://66940638c6be000fa07df004.mockapi.io/mapapikey'
         );
         const fetchedApiKey = MapsApiKey.data[0].mapKey;
-        console.log('Fetched API Key:', fetchedApiKey);
+        console.log('Fetched API Key:', fetchedApiKey); // In ra API key để kiểm tra
         setApiKey(fetchedApiKey);
         setIsScriptLoaded(true);
       } catch (error) {
@@ -85,9 +85,10 @@ export default function MapComponent({ tripId }: MapComponentProps) {
 
     fetchApiKey();
   }, []);
+
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: apiKey,
-    libraries: isScriptLoaded ? libraries : [], // Use the static libraries array
+    googleMapsApiKey: apiKey || '', // Đảm bảo API key được truyền vào
+    libraries: isScriptLoaded ? libraries : [], // Sử dụng mảng libraries tĩnh
   });
 
   const mapRef = createRef<GoogleMap>();
