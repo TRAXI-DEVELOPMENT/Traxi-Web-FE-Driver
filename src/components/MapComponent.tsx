@@ -4,7 +4,7 @@ import { createRef, useEffect, useState } from 'react';
 // api
 import { getDetailTrip } from 'src/api/Trip/Trip'; // Assuming getPositionById is added here
 // layouts
-import { GoogleMap, useLoadScript, DirectionsRenderer } from '@react-google-maps/api';
+import { GoogleMap, useLoadScript, DirectionsRenderer, Libraries } from '@react-google-maps/api';
 import { getPositionById } from 'src/api/GoogleMap/Map';
 import requestWebDriver, { axiosInstances } from 'src/utils/axios';
 
@@ -42,7 +42,7 @@ interface TripDetails {
   };
 }
 
-const libraries = ['places']; // Define libraries outside the component
+const libraries: Libraries = ['places']; // Define libraries outside the component
 
 export default function MapComponent({ tripId }: MapComponentProps) {
   const router = useRouter();
