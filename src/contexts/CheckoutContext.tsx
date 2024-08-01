@@ -4,6 +4,7 @@ interface CheckoutData {
   Fullname: string;
   Phone: string;
   Address: string;
+  Birthday: string;
   Password: string;
   confirmPassword: string;
   expirationDate?: string;
@@ -26,6 +27,7 @@ export const CheckoutProvider: React.FC<CheckoutProviderProps> = ({ children }) 
     Fullname: '',
     Phone: '',
     Address: '',
+    Birthday: '',
     Password: '',
     confirmPassword: '',
   });
@@ -33,11 +35,7 @@ export const CheckoutProvider: React.FC<CheckoutProviderProps> = ({ children }) 
   // Sử dụng useMemo để đối tượng value chỉ được tạo mới khi checkoutData thay đổi
   const value = useMemo(() => ({ checkoutData, setCheckoutData }), [checkoutData]);
 
-  return (
-    <CheckoutContext.Provider value={value}>
-      {children}
-    </CheckoutContext.Provider>
-  );
+  return <CheckoutContext.Provider value={value}>{children}</CheckoutContext.Provider>;
 };
 
 export const useCheckout = () => {

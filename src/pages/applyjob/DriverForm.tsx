@@ -63,6 +63,21 @@ export default function DriverForm() {
         />
       </FormGrid>
       <FormGrid item xs={12}>
+        <FormLabel htmlFor="Birthday" required>
+          Ngày tháng năm sinh (dd/mm/yyyy)
+        </FormLabel>
+        <OutlinedInput
+          id="Birthday"
+          name="Birthday"
+          type="text"
+          placeholder="dd/mm/yyyy"
+          required
+          value={checkoutData.Birthday}
+          onChange={handleChange}
+          inputProps={{ pattern: "\\d{2}/\\d{2}/\\d{4}" }}
+        />
+      </FormGrid>
+      <FormGrid item xs={12}>
         <FormLabel htmlFor="s" required>
           Mật khẩu
         </FormLabel>

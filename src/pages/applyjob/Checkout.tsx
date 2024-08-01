@@ -287,6 +287,7 @@ function ApplyJob() {
           Phone: checkoutData.Phone,
           Address: checkoutData.Address,
           Password: checkoutData.Password,
+          Birthday: checkoutData.Birthday,
         });
         const date = formatDateDegree(checkoutData.expirationDate || '');
         const degreeResponse = await postDriverDegree({

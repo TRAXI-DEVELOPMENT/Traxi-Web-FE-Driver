@@ -5,6 +5,7 @@ export const applyForJob = async ({
   Fullname,
   Phone,
   Address,
+  Birthday,
   Password,
 }: applyJob): Promise<any> => {
   try {
@@ -12,6 +13,7 @@ export const applyForJob = async ({
       Fullname,
       Phone,
       Address,
+      Birthday,
       Password,
     });
     return response.data.result;

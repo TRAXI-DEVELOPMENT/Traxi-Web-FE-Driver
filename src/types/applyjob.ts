@@ -3,6 +3,7 @@ export interface applyJob {
   Phone: string;
   Address: string;
   Password: string;
+  Birthday: string;
   // ImageUrl: string;
 }
 

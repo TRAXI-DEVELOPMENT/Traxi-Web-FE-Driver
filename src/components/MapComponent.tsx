@@ -6,6 +6,7 @@ import { getDetailTrip } from 'src/api/Trip/Trip'; // Assuming getPositionById i
 // layouts
 import { GoogleMap, useLoadScript, DirectionsRenderer } from '@react-google-maps/api';
 import { getPositionById } from 'src/api/GoogleMap/Map';
+import requestWebDriver, { axiosInstances } from 'src/utils/axios';
 
 const mapContainerStyle = {
   width: '800px',
@@ -47,8 +48,8 @@ export default function MapComponent({ tripId }: MapComponentProps) {
   const [directionsResponse, setDirectionsResponse] = useState<google.maps.DirectionsResult | null>(
     null
   );
-
-  // const customerId = tripDetails?.CustomerId;
+  const [apiKey, setApiKey] = useState<string>('');
+  const [isScriptLoaded, setIsScriptLoaded] = useState(false);
 
   useEffect(() => {
     const fetchTripDetails = async () => {
@@ -64,9 +65,26 @@ export default function MapComponent({ tripId }: MapComponentProps) {
 
     fetchTripDetails();
   }, [tripId]);
+  useEffect(() => {
+    const fetchApiKey = async () => {
+      try {
+        const MapsApiKey = await requestWebDriver.get(
+          'https://66940638c6be000fa07df004.mockapi.io/mapapikey'
+        );
+        const fetchedApiKey = MapsApiKey.data[0].mapKey;
+        setApiKey(fetchedApiKey);
+        setIsScriptLoaded(true);
+      } catch (error) {
+        console.error('Lỗi khi lấy API key:', error);
+      }
+    };
+
+    fetchApiKey();
+  }, []);
 
   const { isLoaded, loadError } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyB-aA4BER14CVpEjoGLC7LEculJTCC5uTg',
+    googleMapsApiKey: apiKey,
+    libraries: isScriptLoaded ? ['places'] : [],
   });
 
   const mapRef = createRef<GoogleMap>();
