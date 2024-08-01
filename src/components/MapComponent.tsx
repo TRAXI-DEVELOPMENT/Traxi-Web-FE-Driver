@@ -42,6 +42,8 @@ interface TripDetails {
   };
 }
 
+const libraries = ['places']; // Define libraries outside the component
+
 export default function MapComponent({ tripId }: MapComponentProps) {
   const router = useRouter();
   const [tripDetails, setTripDetails] = useState<TripDetails | null>(null);
@@ -75,7 +77,7 @@ export default function MapComponent({ tripId }: MapComponentProps) {
         setApiKey(fetchedApiKey);
         setIsScriptLoaded(true);
       } catch (error) {
-        console.error('Lỗi khi lấy API key:', error);
+        console.error('Error fetching API key:', error);
       }
     };
 
@@ -84,7 +86,7 @@ export default function MapComponent({ tripId }: MapComponentProps) {
 
   const { isLoaded, loadError } = useLoadScript({
     googleMapsApiKey: apiKey,
-    libraries: isScriptLoaded ? ['places'] : [],
+    libraries: isScriptLoaded ? libraries : [], // Use the static libraries array
   });
 
   const mapRef = createRef<GoogleMap>();
@@ -132,8 +134,8 @@ export default function MapComponent({ tripId }: MapComponentProps) {
     fetchPositionAndCalculateRoute();
   }, [isLoaded, tripId]);
 
-  if (loadError) return <div>Lỗi khi tải bản đồ</div>;
-  if (!isLoaded) return <div>Đang tải bản đồ...</div>;
+  if (loadError) return <div>Error loading map</div>;
+  if (!isLoaded) return <div>Loading map...</div>;
 
   return (
     <>
